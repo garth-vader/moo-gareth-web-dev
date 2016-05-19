@@ -1,7 +1,19 @@
-.container {
-    margin-bottom: 10px;
+input {
+    margin-bottom: 5px;
 }
 
 .btn-primary {
     background-color: deepskyblue;
+}
+
+.btn {
+    border-radius: 21px;
+}
+
+body {
+    padding-top: 60px;
+}
+
+p.navbar-text.pull-right {
+    margin-right: 15px;
 }
