@@ -24,7 +24,9 @@ p.navbar-text.pull-left {
 span.glyphicon-eye-open {
     margin-left: 8px;
 }
-
+li.list-group-item {
+    border: 1px transparent;
+}
 .ggm-widget-tool {
     position: absolute;
     right: 0;
