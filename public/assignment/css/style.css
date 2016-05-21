@@ -12,6 +12,7 @@ input {
 
 body {
     padding-top: 60px;
+    padding-bottom: 100px;
 }
 
 p.navbar-text.pull-right {
@@ -19,4 +20,38 @@ p.navbar-text.pull-right {
 }
 p.navbar-text.pull-left {
     margin-left: 15px;
+}
+
+.ggm-widget-tool {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    padding-left: 5px;
+    border-bottom: 5px;
+    border-bottom-left-radius: 8px;
+}
+
+.ggm-widget {
+    padding-left: 8px;
+    padding-right: 8px;
+
+}
+/* Grabbed this from http://stackoverflow.com/a/17465040*/
+.auto-resizable-iframe {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.auto-resizable-iframe > div {
+    position: relative;
+    padding-bottom: 75%;
+    height: 0;
+}
+
+.auto-resizable-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
