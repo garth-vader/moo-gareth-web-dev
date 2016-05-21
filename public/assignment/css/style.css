@@ -12,7 +12,7 @@ input {
 
 body {
     padding-top: 60px;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 }
 
 p.navbar-text.pull-right {
@@ -20,6 +20,9 @@ p.navbar-text.pull-right {
 }
 p.navbar-text.pull-left {
     margin-left: 15px;
+}
+span.glyphicon-eye-open {
+    margin-left: 8px;
 }
 
 .ggm-widget-tool {
