@@ -1,4 +1,3 @@
-(function () {
-    angular.module("WebAppMaker", []);
+(function(){
+    angular.module("WebAppMaker", ["ngRoute"]);
 })();
-
