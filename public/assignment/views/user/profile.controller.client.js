@@ -3,19 +3,14 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController)
     
-    function ProfileController($routeParams) {
+    function ProfileController($routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
         var id = $routeParams["id"];
         var index = -1;
         console.log(id);
         function init() {
-            for (var i in users) {
-                if (users[i]._id === id) {
-                    vm.user = angular.copy(users[i]);
-                    index = i;
-                }
-            }
+            vm.user = UserService.findUserById(id);
         }
 
         init();

@@ -14,12 +14,15 @@
 
         var api = {
             createUser: createUser,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword
+            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserById: findUserById,
+            updateUser: updateUser
 
         };
         return api;
 
         function createUser() {}
+        function updateUser() {}
         function findUserByUsernameAndPassword(username, password) {
             for (var i in users) {
                 if (users[i].username === username && users[i].password === password) {
@@ -28,6 +31,13 @@
             }
             return null;
         }
-        
+        function findUserById(id) {
+            for (var i in users) {
+                if (users[i]._id === id) {
+                    return angular.copy(users[i]);
+                }
+            }
+            return null
+        }
     }
 })();
