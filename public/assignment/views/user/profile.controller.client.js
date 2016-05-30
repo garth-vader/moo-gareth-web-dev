@@ -23,5 +23,14 @@
                 vm.error = "User Not Found";
             }
         }
+
+        function deleteUser() {
+            if (UserService.deleteUser(vm.user._id)) {
+                vm.success = "User Successfully Deleted";
+            }
+            else {
+                vm.error = "User NOT Deleted";
+            }
+        }
     }
 })();

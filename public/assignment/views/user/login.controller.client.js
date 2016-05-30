@@ -10,7 +10,7 @@
             var user = UserService.findUserByCredentials(username, password);
             if (user) {
                 var id = user._id;
-                $location.url("/profile/" + id);
+                $location.url("/user/" + id);
             } else {
                 vm.error = "User not found";
             }

@@ -65,14 +65,15 @@
         }
 
         function deleteUser(userId) {
-            var user = findUserById(userId);
-            if (user != null) {
-                return false;
+            var bool = false;
+            for (var i in users) {
+                if (users[i]._id === userId) {
+                    users.splice(i, 1);
+                    console.log(users);
+                    bool =  true;
+                }
             }
-            else {
-                users.remove(user);
-                
-            }
+            return bool;
         }
 
     }

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand"
+               href="#/user/{{model.user._id}}">
                 Profile
             </a>
             <p class="navbar-text pull-right">
@@ -19,8 +20,8 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#" class="navbar-link">
-                    <a href="#">
+                <a class="navbar-link">
+                    <a href="#/user/{{model.user._id}}">
                         <span class="glyphicon glyphicon-user">
                         </span>
                     </a>
@@ -75,7 +76,9 @@
     </form>
 
     <a class="btn btn-primary btn-block"
-       href="../website/website-list.html">Applications</a>
+       href="#/login/{{model.user._id}}/website">Applications</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Logout</a>
+    <a ng-click="model.deleteUser()"
+       class="btn btn-danger btn-block">DELETE USER</a>
 </div>
