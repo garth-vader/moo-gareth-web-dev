@@ -14,16 +14,26 @@
 
         var api = {
             createUser: createUser,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findUserById: findUserById,
-            updateUser: updateUser
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
+            updateUser: updateUser,
+            deleteUser: deleteUser
 
         };
         return api;
 
-        function createUser() {}
-        function updateUser() {}
-        function findUserByUsernameAndPassword(username, password) {
+        function createUser(user) {}
+        function findUserByUsername(username) {
+            for (var i in users) {
+                if (users[i].username === username) {
+                    return users[i];
+                }
+            }
+            return null;
+        }
+
+        function findUserByCredentials(username, password) {
             for (var i in users) {
                 if (users[i].username === username && users[i].password === password) {
                     return users[i];
@@ -31,13 +41,39 @@
             }
             return null;
         }
+
         function findUserById(id) {
             for (var i in users) {
                 if (users[i]._id === id) {
-                    return angular.copy(users[i]);
+                    return users[i];
                 }
             }
             return null
         }
+
+        function updateUser(id, newUser) {
+            for (var i in users) {
+                if (users[i]._id === id) {
+                    users[i].firstName = newUser.firstName;
+                    users[i].lastName = newUser.lastName;
+                    users[i].username = newUser.username;
+                    users[i].password = newUser.password;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function deleteUser(userId) {
+            var user = findUserById(userId);
+            if (user != null) {
+                return false;
+            }
+            else {
+                users.remove(user);
+                
+            }
+        }
+
     }
 })();
