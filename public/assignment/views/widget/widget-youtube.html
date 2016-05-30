@@ -42,7 +42,7 @@
         <div class="navbar-header">
             <p class="navbar-text pull-right">
                 <a href="#" class="navbar-link">
-                    <a href="../user/profile.html">
+                    <a href="../user/profile.view.client.html">
                         <span class="glyphicon glyphicon-user">
                         </span>
                     </a>
@@ -59,23 +59,28 @@
             <input type="text"
                    class="form-control"
                    id="name"
-                   placeholder="Heading Name"/>
+                   placeholder="Youtube Video Name"/>
         </div>
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text"
                    class="form-control"
                    id="title"
-                   placeholder="Heading Text"/>
+                   placeholder="Youtube Video Text"/>
         </div>
         <div class="form-group">
-            <label class="control-label">Size</label>
-            <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-            </select>
+            <label for="URL">URL</label>
+            <input type="url"
+                   class="form-control"
+                   id="URL"
+                   placeholder="https://www.youtu.be/dQw4w9WgXcQ"/>
+        </div>
+        <div class="form-group">
+            <label for="width">Width</label>
+            <input type="number"
+                   class="form-control"
+                   id="width"
+                   placeholder="100%"/>
         </div>
         <a class="btn btn-danger btn-block"
            href="widget-list.html">Delete</a>
