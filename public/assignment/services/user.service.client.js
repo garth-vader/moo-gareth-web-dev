@@ -27,7 +27,6 @@
             if (findUserById(user._id) === null &&
                 findUserByUsername(user.username) === null) {
                 users.push(user);
-                console.log(users);
                 return true;
             }
             return false;
@@ -45,6 +44,7 @@
         function findUserByCredentials(username, password) {
             for (var i in users) {
                 if (users[i].username === username && users[i].password === password) {
+
                     return angular.copy(users[i]);
                 }
             }
@@ -54,18 +54,15 @@
         function findUserById(id) {
             for (var i in users) {
                 if (users[i]._id === id) {
-                    console.log(users[i]);
                     return angular.copy(users[i]);
                 }
             }
-            console.log(users);
-
             return null
         }
 
         function updateUser(id, newUser) {
             for (var i in users) {
-                if (users[i]._id === id) {
+                if (id !== null && users[i]._id === id) {
                     users[i].firstName = newUser.firstName;
                     users[i].lastName = newUser.lastName;
                     users[i].password = newUser.password;

@@ -12,7 +12,6 @@
         function init() {
             vm.user = UserService.findUserById(id);
         }
-        console.log(vm.user);
         init();
 
         function updateUser() {
