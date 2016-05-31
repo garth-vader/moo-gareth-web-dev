@@ -7,13 +7,24 @@
                   </span>
                 </a>
             </p>
-            <a class="navbar-brand" href="profile.html">
+            <a class="navbar-brand" href="#/user/:uid/">
                 Widgets
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid/website/:wid/page/:pid/widget/new" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
                   <span class="glyphicon glyphicon-plus">
                   </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="#/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user header-glyphicon"></span>
                 </a>
             </p>
         </div>
@@ -22,11 +33,12 @@
 
 <div ng-repeat="widget in model.widgets" ng-switch="widget.widgetType">
     <div class="ggm-widget-tool">
-        <a href="#">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
         </a>
         <span class="glyphicon glyphicon-align-justify"></span>
     </div>
+
     <div ng-switch-when="HEADER" class="ggm-widget">
         <div ng-switch="widget.size">
             <h1 ng-switch-when="1">{{widget.text}}</h1>

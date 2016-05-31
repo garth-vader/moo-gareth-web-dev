@@ -1,28 +1,58 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a href="../page/page-list.html" class="navbar-link">
-                  <span class="glyphicon glyphicon-chevron-left">
-                  </span>
-                </a>
-            </p>
-            <a class="navbar-brand" href="profile.html">
-                Widget Chooser
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+               class="navbar-link navbar-brand">
+                <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
+            <a class="navbar-brand"
+               href="">
+                Choose Widget
+            </a>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#/user/:uid/website/:wid/page/:pid/widget/new" class="navbar-link">
-                  <span class="glyphicon glyphicon-plus">
-                  </span>
+                <a href="#/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user header-glyphicon"></span>
                 </a>
             </p>
         </div>
     </div>
 </nav>
+<div class="container">
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Header</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Label</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">HTML</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Text Input</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Link</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Button</a>
+    <a href=""
+       ng-click="model.createWidget('IMAGE')"
+       class="row">Image</a>
+    <a href=""
+       ng-click="model.createWidget('YOUTUBE')"
+       class="row">YouTube</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Data Table</a>
+    <a href=""
+       ng-click="model.createWidget('HEADER')"
+       class="row">Repeater</a>
+</div>
 
-<a href="" ng-click="model.createWidget('HEADING')">Heading</a>
-<br/>
-<a href="" ng-click="model.createWidget('IMAGE')">Image</a>
-<br/>
-<a href="" ng-click="model.createWidget('YOUTUBE')">YouTube</a>
-<br/>
