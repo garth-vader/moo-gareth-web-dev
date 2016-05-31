@@ -16,8 +16,8 @@
             user._id = ((new Date()).getTime());
             user.username = username;
             user.password = password;
-            if (UserService(user)) {
-                
+            if (UserService.createUser(user)) {
+                vm.success()
             } else {
 
             }
