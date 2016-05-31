@@ -30,9 +30,19 @@
                 controller: "NewWebsiteController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid", {
-                templateUrl: "views/website/website-edit.view.client.html",
-                controller: "EditWebsiteController",
+            .when("/user/:uid/website/:wid/page", {
+                templateUrl: "views/page/page-list.view.client.html",
+                controller: "PageListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/new", {
+                templateUrl: "views/page/page-new.view.client.html",
+                controller: "NewPageController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid", {
+                templateUrl: "views/page/page-edit.view.client.html",
+                controller: "EditPageController",
                 controllerAs: "model"
             })
             .otherwise({
