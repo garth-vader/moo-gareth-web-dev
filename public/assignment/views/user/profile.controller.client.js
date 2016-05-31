@@ -6,6 +6,7 @@
     function ProfileController($routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
         var id = $routeParams["id"];
         console.log(id);
         function init() {
@@ -15,22 +16,22 @@
         init();
 
         function updateUser() {
-            var result = UserService.updateUser(vm.user._id, vm.user);
-            if (result === true) {
+            if (UserService.updateUser(vm.user._id, vm.user)) {
                 vm.success = "User Successfully Updated";
+                init();
+            } else {
+                vm.error = "Unable to Update";
             }
-            else {
-                vm.error = "User Not Found";
-            }
-        }
+        };
 
         function deleteUser() {
-            if (UserService.deleteUser(vm.user._id)) {
-                vm.success = "User Successfully Deleted";
+            if (UserService.deleteUser(id)) {
+                vm.success = "User Successfully Deleted"
+                init();
             }
             else {
                 vm.error = "User NOT Deleted";
             }
-        }
+        };
     }
 })();

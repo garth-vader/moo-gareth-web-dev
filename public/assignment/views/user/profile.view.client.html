@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand"
-               href="#/user/{{model.user._id}}">
+               href="#/user/{{model.user._id}}/">
                 Profile
             </a>
             <p class="navbar-text pull-right">
@@ -21,7 +21,7 @@
         <div class="navbar-header">
             <p class="navbar-text pull-right">
                 <a class="navbar-link">
-                    <a href="#/user/{{model.user._id}}">
+                    <a href="#/user/{{model.user._id}}/">
                         <span class="glyphicon glyphicon-user">
                         </span>
                     </a>
@@ -37,7 +37,7 @@
     </div>
 
     <div ng-show="model.error" class="alert alert-danger">
-        {{mode.error}}
+        {{model.error}}
     </div>
 
     <form>
@@ -79,6 +79,6 @@
        href="#/login/{{model.user._id}}/website">Applications</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Logout</a>
-    <a ng-click="model.deleteUser()"
-       class="btn btn-danger btn-block">DELETE USER</a>
+    <a class="btn btn-danger btn-block"
+        ng-click="model.deleteUser()">DELETE USER</a>
 </div>
