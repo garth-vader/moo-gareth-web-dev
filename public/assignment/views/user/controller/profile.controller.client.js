@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController)
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($location, $routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
@@ -26,7 +26,7 @@
         function deleteUser() {
             if (UserService.deleteUser(id)) {
                 vm.success = "User Successfully Deleted"
-                init();
+                $location.url("login");
             }
             else {
                 vm.error = "User NOT Deleted";

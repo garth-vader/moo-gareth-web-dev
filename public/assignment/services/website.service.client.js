@@ -22,7 +22,14 @@
         };
         return api;
 
-        function createWebsite() {}
+        function createWebsite(userId, website) {
+            if(!findWebsiteById(website._id)) {
+                website.developerId = userId;
+                websites.push(website);
+                return true;
+            }
+            return false;
+        }
 
         function findWebsiteById(websiteId) {
             for(var i in websites) {
@@ -47,7 +54,7 @@
         }
 
         function deleteWebsite() {
-            
+
         }
     }
 })();

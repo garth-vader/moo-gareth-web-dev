@@ -8,6 +8,14 @@
         vm.register = register;
 
         function register(username, password, verifyPassword) {
+            if (username == null || username == "") {
+                vm.error = "Username is empty";
+                return false;
+            }
+            if (password == null || password == "") {
+                vm.error = "Password is Empty";
+                return false;
+            }
             if(password === verifyPassword) {
                 var user = {};
                 user._id = ((new Date()).getTime()).toString();
