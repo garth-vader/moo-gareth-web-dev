@@ -12,22 +12,60 @@
 
         var api = {
             createPage:createPage,
-            findPageByWebsiteId:findPageByWebsiteId,
+            findPagesByWebsiteId:findPagesByWebsiteId,
             findPageById:findPageById,
             updatePage:updatePage,
             deletePage:deletePage
         }
         return api;
 
-        function createPage() {}
+        function createPage(websiteId, page) {
+            if(!findPageById(page._id)) {
+                page.websiteId = websiteId;
+                pages.push(page);
+                return true;
+            }
+            return false;
+        }
 
-        function findPageByWebsiteId() {}
+        function findPagesByWebsiteId(websiteId) {
+            var result = [];
+            for(var i in pages) {
+                if(pages[i].websiteId === websiteId) {
+                    result.push(pages[i]);
+                }
+            }
+            return result;
+        }
 
-        function findPageById() {}
+        function findPageById(pageId) {
+            for(var i in pages) {
+                if(pages[i]._id === pageId) {
+                    return angular.copy(pages[i]);
+                }
+            }
+            return null;
+        }
 
-        function updatePage() {}
+        function updatePage(pageId, page) {
+            for(var i in pages) {
+                if(pages[i]._id === pageId) {
+                    pages[i].name = page.name;
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        function deletePage() {}
+        function deletePage(pageId) {
+            for(var i in pages) {
+                if(pages[i]._id === pageId) {
+                    pages.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 })();
