@@ -27,6 +27,7 @@
             if (findUserById(user._id) === null &&
                 findUserByUsername(user.username) === null) {
                 users.push(user);
+                console.log(users);
                 return true;
             }
             return false;
@@ -53,9 +54,12 @@
         function findUserById(id) {
             for (var i in users) {
                 if (users[i]._id === id) {
+                    console.log(users[i]);
                     return angular.copy(users[i]);
                 }
             }
+            console.log(users);
+
             return null
         }
 
