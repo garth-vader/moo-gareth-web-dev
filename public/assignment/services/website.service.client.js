@@ -1,89 +1,53 @@
-(function() {
-    angular
-        .module("WebAppMaker")
+(function(){
+    angular.module("WebAppMaker")
         .factory("WebsiteService", WebsiteService);
+
+    var websites = [
+        { "_id": "123", "name": "Facebook",    "developerId": "456" },
+        { "_id": "234", "name": "Tweeter",     "developerId": "456" },
+        { "_id": "456", "name": "Gizmodo",     "developerId": "456" },
+        { "_id": "567", "name": "Tic Tac Toe", "developerId": "123" },
+        { "_id": "678", "name": "Checkers",    "developerId": "123" },
+        { "_id": "789", "name": "Chess",       "developerId": "234" }
+    ];
 
     function WebsiteService() {
 
-        var users = [
-            {_id: "123", username: "alice", password: "alice", email: "alice@alice.com", firstName: "Alice", lastName: "Wonder"},
-            {_id: "234", username: "bob", password: "bob", email:"bob@bob.com", firstName: "Bob", lastName: "Marley"},
-            {_id: "345", username: "charly", password: "charly", email:"charly@charly.com", firstName: "Charly", lastName: "Garcia"},
-            {_id: "456", username: "jannunzi", password: "jannunzi", email:"jannunzi@junnunzi.com", firstName: "Jose", lastName: "Annunzi"}
-        ];
-
         var api = {
-            createUser: createUser,
-            findUserById: findUserById,
-            findUserByUsername: findUserByUsername,
-            findUserByCredentials: findUserByCredentials,
-            updateUser: updateUser,
-            deleteUser: deleteUser
-
+            createWebsite: createWebsite,
+            findWebsitesByUser: findWebsitesByUser,
+            findWebsiteById: findWebsiteById,
+            updateWebsite: updateWebsite,
+            deleteWebsite: deleteWebsite
         };
         return api;
 
-        function createUser(user) {
-            if (findUserById(user._id) === null &&
-                findUserByUsername(user.username) === null) {
-                users.push(user);
-                return true;
-            }
-            return false;
+        function createWebsite() {}
 
-        }
-        function findUserByUsername(username) {
-            for (var i in users) {
-                if (users[i].username === username) {
-                    return angular.copy(users[i]);
+        function findWebsiteById(websiteId) {
+            for(var i in websites) {
+                if(websites[i]._id === websiteId) {
+                    return websites[i];
                 }
             }
             return null;
         }
 
-        function findUserByCredentials(username, password) {
-            for (var i in users) {
-                if (users[i].username === username && users[i].password === password) {
-
-                    return angular.copy(users[i]);
+        function findWebsitesByUser(userId) {
+            var result = [];
+            for(var i in websites) {
+                if(websites[i].developerId === userId) {
+                    result.push(websites[i]);
                 }
             }
-            return null;
+            return result;
         }
 
-        function findUserById(id) {
-            for (var i in users) {
-                if (users[i]._id === id) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null
+        function updateWebsite() {
         }
 
-        function updateUser(id, newUser) {
-            for (var i in users) {
-                if (id !== null && users[i]._id === id) {
-                    users[i].firstName = newUser.firstName;
-                    users[i].lastName = newUser.lastName;
-                    users[i].password = newUser.password;
-                    users[i].email = newUser.email;
-
-                    return true;
-                }
-            }
-            return false;
+        function deleteWebsite() {
+            
         }
-
-        function deleteUser(userId) {
-            var bool = false;
-            for (var i in users) {
-                if (users[i]._id === userId) {
-                    users.splice(i, 1);
-                    bool =  true;
-                }
-            }
-            return bool;
-        }
-
     }
 })();

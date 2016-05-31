@@ -7,7 +7,7 @@
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
-        var id = $routeParams["id"];
+        var id = $routeParams["uid"];
         console.log(id);
         function init() {
             vm.user = UserService.findUserById(id);
