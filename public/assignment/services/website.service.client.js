@@ -34,7 +34,7 @@
         function findWebsiteById(websiteId) {
             for(var i in websites) {
                 if(websites[i]._id === websiteId) {
-                    return websites[i];
+                    return angular.copy(websites[i]);
                 }
             }
             return null;
@@ -50,10 +50,24 @@
             return result;
         }
 
-        function updateWebsite() {
+        function updateWebsite(websiteId, website) {
+            for(var i in websites) {
+                if(websites[i]._id === websiteId) {
+                    websites[i].name = website.name;
+                    return true;
+                }
+            }
+            return false;
         }
 
-        function deleteWebsite() {
+        function deleteWebsite(websiteId) {
+            for(var i in websites) {
+                if(websites[i]._id === websiteId) {
+                    websites.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
 
         }
     }
