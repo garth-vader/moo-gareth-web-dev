@@ -3,14 +3,7 @@
         .module("WebAppMaker")
         .factory("UserService", UserService);
 
-    function UserService() {
-
-        var users = [
-                {_id: "123", username: "alice", password: "alice", email: "alice@alice.com", firstName: "Alice", lastName: "Wonder"},
-                {_id: "234", username: "bob", password: "bob", email:"bob@bob.com", firstName: "Bob", lastName: "Marley"},
-                {_id: "345", username: "charly", password: "charly", email:"charly@charly.com", firstName: "Charly", lastName: "Garcia"},
-                {_id: "456", username: "jannunzi", password: "jannunzi", email:"jannunzi@junnunzi.com", firstName: "Jose", lastName: "Annunzi"}
-        ];
+    function UserService($http) {
 
         var api = {
             createUser: createUser,
@@ -42,23 +35,15 @@
         }
 
         function findUserByCredentials(username, password) {
-            for (var i in users) {
-                if (users[i].username === username && users[i].password === password) {
-
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            var url = "/api/user?username="+username+"&password="+password;
+            return $http.get(url);
         }
-
+        
         function findUserById(id) {
-            for (var i in users) {
-                if (users[i]._id === id) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null
+            var url = "/api/user/" + id;
+            return $http.get(url);
         }
+
 
         function updateUser(id, newUser) {
             for (var i in users) {

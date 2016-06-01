@@ -10,16 +10,20 @@
         var id = $routeParams["uid"];
         console.log(id);
         function init() {
-            vm.user = UserService.findUserById(id);
+            UserService
+                .findUserById(id)
+                .then(function(response) {
+                    vm.user = response.data;
+                });
         }
         init();
 
         function updateUser() {
-            if (UserService.updateUser(vm.user._id, vm.user)) {
-                vm.success = "User Successfully Updated";
-                init();
+            var result = UserService.updateUser(vm.user._id, vm.user);
+            if(result === true) {
+                vm.success = "User successfully updated";
             } else {
-                vm.error = "Unable to Update";
+                vm.error = "User not found";
             }
         }
         function deleteUser() {
