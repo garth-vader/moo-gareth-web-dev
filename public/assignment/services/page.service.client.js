@@ -16,7 +16,7 @@
             findPageById:findPageById,
             updatePage:updatePage,
             deletePage:deletePage
-        }
+        };
         return api;
 
         function createPage(websiteId, page) {

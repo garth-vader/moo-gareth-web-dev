@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
+
+var assignment = require('./assignment/app.js');
+assignment(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

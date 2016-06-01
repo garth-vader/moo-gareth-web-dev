@@ -1,7 +1,7 @@
 (function() {
     angular
         .module("WebAppMaker")
-        .controller("ProfileController", ProfileController)
+        .controller("ProfileController", ProfileController);
 
     function ProfileController($location, $routeParams, UserService) {
         var vm = this;
@@ -21,16 +21,15 @@
             } else {
                 vm.error = "Unable to Update";
             }
-        };
-
+        }
         function deleteUser() {
             if (UserService.deleteUser(id)) {
-                vm.success = "User Successfully Deleted"
+                vm.success = "User Successfully Deleted";
                 $location.url("login");
             }
             else {
                 vm.error = "User NOT Deleted";
             }
-        };
+        }
     }
 })();
