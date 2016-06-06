@@ -101,6 +101,9 @@
                 <input  name="userId" value="{{model.userId}}" style="display: none"/>
                 <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
             </form>
+            <a ng-click="model.flickrNavigation()"
+               href=""
+               class="btn btn-block btn-primary bmd-margin-top-10">Search Flickr</a>
         </div>
 
         <div ng-switch-when="YOUTUBE">

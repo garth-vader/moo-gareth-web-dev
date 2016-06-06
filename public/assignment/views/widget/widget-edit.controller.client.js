@@ -7,6 +7,7 @@
         var vm = this;
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
+        vm.flickrNavigation = flickrNavigation;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
@@ -48,6 +49,17 @@
                     function(error) {
                         vm.error = error.data;
                     });
+        }
+
+        function flickrNavigation() {
+            WidgetService
+                .updateWidget(vm.widgetId, vm.widget)
+                .then(function (resp) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId +
+                        "/widget/" + vm.widgetId + "/flickr");
+                }, function (error) {
+                    vm.error = error.data;
+                });
         }
     }
 })();

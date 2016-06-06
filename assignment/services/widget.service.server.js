@@ -57,7 +57,9 @@ module.exports = function(app) {
 
     function createWidget(req, res) {
         var newWidget = req.body;
+        var pageId = req.params.pageId;
         newWidget._id = (new Date()).getTime() + "";
+        newWidget.pageId = pageId;
         widgets.push(newWidget);
         res.json(newWidget);
     }
@@ -90,7 +92,6 @@ module.exports = function(app) {
         for(var i in widgets) {
             if(widgets[i]._id == widgetId) {
                 widgets[i].widgetType = widget.widgetType;
-                widgets[i].pageId = widget.pageId;
 
                 if(widget.widgetType === "HEADER") {
                     widgets[i].size = widget.size;
@@ -99,6 +100,9 @@ module.exports = function(app) {
                     widgets[i].text = widget.text;
                 }
                 if(widget.widgetType === "YOUTUBE" || widget.widgetType === "IMAGE") {
+
+                    widgets[i].name = widget.name;
+                    widgets[i].text = widget.text;
                     widgets[i].width = widget.width;
                     widgets[i].url = widget.url;
                 }
