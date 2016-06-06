@@ -55,6 +55,7 @@ module.exports = function(app) {
         for(var i in widgets) {
             if(widgets[i]._id == id) {
                 res.send(widgets[i]);
+                return;
             }
         }
         res.status(404).send("Widget "+id+" not found");
@@ -91,6 +92,7 @@ module.exports = function(app) {
             if(widgets[i]._id === widgetId) {
                 widgets.splice(i, 1);
                 res.sendStatus(200);
+                return;
             }
         }
         res.status(404).send("Widget "+widgetId+" not found");
