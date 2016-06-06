@@ -25,10 +25,10 @@
                 vm.error = "Username is empty";
                 return false;
             }
-/*            if (vm.user.email == null || vm.user.email == "") {
-                vm.error = "Email is Empty";
-                return false;
-            }*/
+            /*            if (vm.user.email == null || vm.user.email == "") {
+             vm.error = "Email is Empty";
+             return false;
+             }*/
             if (vm.user.firstName == null || vm.user.firstName == "") {
                 vm.error = "First name is Empty";
                 return false;

@@ -15,6 +15,8 @@
                      vm.websites = response.data;
                 });
         }
+
         init();
+        
     }
 })();

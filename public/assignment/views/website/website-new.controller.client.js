@@ -6,11 +6,7 @@
     function NewWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
         vm.createWebsite = createWebsite;
-
-        function init() {
-            vm.userId = $routeParams["uid"];
-        }
-        init();
+        vm.userId = $routeParams["uid"];
 
         function createWebsite(name, description) {
             var website = {};
@@ -18,16 +14,20 @@
                 vm.error = "No Website Name";
                 return false;
             }
-            
-            website._id = (new Date()).getTime().toString();
+            website.developerId = vm.userId;
             website.name = name;
             website.description = description;
-            if(WebsiteService.createWebsite(vm.userId, website)) {
-                $location.url("/user/" + vm.userId + "/website");
-            } else {
-                vm.error = "Problems Creating Website";
-                return false;
-            }
+            WebsiteService
+                .createWebsite(vm.userId, website)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website");
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
+
         }
     }
 })();

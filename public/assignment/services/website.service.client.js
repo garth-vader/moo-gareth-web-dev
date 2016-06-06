@@ -14,21 +14,13 @@
         return api;
 
         function createWebsite(userId, website) {
-            if(!findWebsiteById(website._id)) {
-                website.developerId = userId;
-                websites.push(website);
-                return true;
-            }
-            return false;
+            var url = "/api/user/"+userId+"/website";
+            return $http.post(url, website);
         }
 
         function findWebsiteById(websiteId) {
-            for(var i in websites) {
-                if(websites[i]._id === websiteId) {
-                    return angular.copy(websites[i]);
-                }
-            }
-            return null;
+            var url = "/api/website/"+websiteId;
+            return $http.get(url);
         }
 
         function findWebsitesByUser(userId) {
@@ -37,24 +29,13 @@
         }
 
         function updateWebsite(websiteId, website) {
-            for(var i in websites) {
-                if(websites[i]._id === websiteId) {
-                    websites[i].name = website.name;
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/website/"+websiteId;
+            return $http.put(url, website);
         }
 
         function deleteWebsite(websiteId) {
-            for(var i in websites) {
-                if(websites[i]._id === websiteId) {
-                    websites.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
-
+            var url = "/api/website/"+websiteId;
+            return $http.delete(url);
         }
     }
 })();

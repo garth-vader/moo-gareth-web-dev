@@ -20,10 +20,9 @@ module.exports = function(app) {
 
     function createWebsite(req, res) {
         var newWebsite = req.body;
-
         for(var i in websites) {
-            if(websites[i].name === newWebsite.name && websites.developerId === newWebsite.developerId) {
-                res.status(400).send("Website " + newUser.name + " already exists");
+            if(websites[i].name === newWebsite.name && websites[i].developerId === newWebsite.developerId) {
+                res.status(400).send("Website " + newWebsite.name + " already exists");
                 return;
             }
         }
@@ -34,40 +33,40 @@ module.exports = function(app) {
     }
 
     function deleteWebsite(req, res) {
-        var id = req.params.userId;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users.splice(i, 1);
-                res.send(200);
-                return;
-            }
-        }
-        res.status(404).send("Unable to remove user with ID: " + id);
-    }
-
-    function updateWebsite(req, res) {
-        var id = req.params.userId;
-        var newUser = req.body;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users[i].firstName = newUser.firstName;
-                users[i].lastName = newUser.lastName;
+        var id = req.params.websiteId;
+        for(var i in websites) {
+            if(websites[i]._id === id) {
+                websites.splice(i, 1);
                 res.sendStatus(200);
                 return;
             }
         }
-        res.status(400).send("User with ID: "+ id +" not found");
+        res.status(404).send("Unable to remove website with ID: " + id);
     }
 
-    function findWebsiteById(req, res) {
-        var userId = req.params.userId;
-        for(var i in users) {
-            if(userId === users[i]._id) {
-                res.send(users[i]);
+    function updateWebsite(req, res) {
+        var id = req.params.websiteId;
+        var website = req.body;
+        for(var i in websites) {
+            if(websites[i]._id === id) {
+                websites[i].name = website.name;
+                websites[i].description = website.description;
+                res.sendStatus(200);
                 return;
             }
         }
-        res.send({});
+        res.status(400).send("Website with ID: "+ id +" not found");
+    }
+
+    function findWebsiteById(req, res) {
+        var websiteId = req.params.websiteId;
+        for(var i in websites) {
+            if(websiteId === websites[i]._id) {
+                res.json(websites[i]);
+                return;
+            }
+        }
+        res.status(400).send("Unable to find website with id: "+websiteId);
     }
 
     function findAllWebsitesForUser(req, res) {

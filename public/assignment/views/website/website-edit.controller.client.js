@@ -11,31 +11,47 @@
         function init() {
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            WebsiteService
+                .findWebsiteById(vm.websiteId)
+                .then(
+                    function(response) {
+                        vm.website = response.data;
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
         }
         init();
 
         function updateWebsite() {
             if (vm.website.name == null || vm.website.name == "") {
                 vm.error = "Website Name is Empty";
-                return false;
+                return;
             }
-            if (WebsiteService.updateWebsite(vm.websiteId, vm.website)) {
-                $location.url("/user/" + vm.userId + "/website");
-                return true;
-            } else {
-                vm.error = "Unable to update website";
-            }
-            
+
+            WebsiteService
+                .updateWebsite(vm.websiteId, vm.website)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website");
+                    },
+                    function(error) {
+                        vm.error = "Unable to update website";
+                    }
+                );
         }
 
         function deleteWebsite() {
-            if (WebsiteService.deleteWebsite(vm.websiteId)) {
-                $location.url("/user/" + vm.userId + "/website");
-                return true;
-            } else {
-                vm.error = "Unable to Delete Website";
-            }
+            WebsiteService
+                .deleteWebsite(vm.websiteId)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website");
+                    },
+                    function(error) {
+                        vm.error = error.data;
+            });
         }
     }
 })();
