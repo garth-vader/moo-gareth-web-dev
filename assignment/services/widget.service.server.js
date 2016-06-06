@@ -15,25 +15,48 @@ module.exports = function(app) {
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
 
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
+
+
+    function uploadImage(req, res) {
+        var widgetId      = req.body.widgetId;
+        var userId        = req.body.userId;
+        var websiteId     = req.body.websiteId;
+        var pageId        = req.body.pageId;
+        var width         = req.body.width;
+        var myFile        = req.file;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+        for(var i in widgets) {
+            if(widgets[i]._id == widgetId) {
+                widgets[i].width = width;
+                widgets[i].pageId = pageId;
+                widgets[i].widgetType = "IMAGE";
+                widgets[i].url = "/uploads/" + filename;
+                res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                return;
+            }
+        }
+        res.sendStatus(404);
+
+    }
 
     function createWidget(req, res) {
         var newWidget = req.body;
-        for (var i in widgets) {
-            if (widgets[i].pageId === newWidget.pageId &&
-                widgets[i].widgetType === newWidget.widgetType &&
-                widgets[i].size === newWidget.size &&
-                widgets[i].text === newWidget.text &&
-                widgets[i].url === newWidget.url &&
-                widgets[i].width === newWidget.width) {
-                    res.status(400).send("Widget with name "+newWidget.name+" already exists");
-                    return;
-            }
-        }
         newWidget._id = (new Date()).getTime() + "";
         widgets.push(newWidget);
         res.json(newWidget);
@@ -80,6 +103,7 @@ module.exports = function(app) {
                     widgets[i].url = widget.url;
                 }
                 res.sendStatus(200);
+                return;
             }
         }
         res.status(404).send("Widget "+widgetId+" not found");
@@ -97,4 +121,6 @@ module.exports = function(app) {
         }
         res.status(404).send("Widget "+widgetId+" not found");
     }
+
+
 }

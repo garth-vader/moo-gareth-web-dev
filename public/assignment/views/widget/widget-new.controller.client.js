@@ -20,8 +20,9 @@
                 .createWidget(vm.pageId, newWidget)
                 .then(
                     function(response) {
+                        var widgetId = response.data._id;
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId +
-                            "/widget/" + newWidget._id);
+                            "/widget/" + widgetId);
                     },
                     function(error) {
                         vm.error = error.data;

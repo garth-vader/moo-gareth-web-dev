@@ -7,16 +7,20 @@
         var vm = this;
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
+        vm.userId = $routeParams["uid"];
+        vm.websiteId = $routeParams["wid"];
+        vm.pageId = $routeParams["pid"];
+        vm.widgetId = $routeParams["wgid"];
 
         function init() {
-            vm.userId = $routeParams["uid"];
-            vm.websiteId = $routeParams["wid"];
-            vm.pageId = $routeParams["pid"];
-            vm.widgetId = $routeParams["wgid"];
+
             WidgetService.findWidgetById(vm.widgetId)
                 .then(
                     function(response) {
                         vm.widget = response.data;
+                    },
+                    function(error) {
+                        console.log(error.data);
                     }
                 );
         }

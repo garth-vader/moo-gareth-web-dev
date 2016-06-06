@@ -7,7 +7,6 @@
             </a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.updateWidget()"
-                   href=""
                    class="navbar-link">
                     <span class="glyphicon glyphicon-ok header-glyphicon"></span>
                 </a>
@@ -63,41 +62,47 @@
             <!-- <div ng­include="'/assignment/views/widget/widget­image.view.client.html'"></div> -->
             <form>
                 <div class="form-group">
-                    <label for="nameIMAGE">Name</label>
+                    <label for="nameImg">Name</label>
                     <input type="text"
                            class="form-control"
-                           id="nameIMAGE"
+                           id="nameImg"
                            ng-model="model.widget.name">
                 </div>
                 <div class="form-group">
-                    <label for="textIMAGE">Text</label>
+                    <label for="textImg">Text</label>
                     <input type="text"
                            class="form-control"
-                           id="textIMAGE"
+                           id="textImg"
                            ng-model="model.widget.text">
                 </div>
                 <div class="form-group">
-                    <label for="urlIMAGE">URL</label>
+                    <label for="urlImg">URL</label>
                     <input type="text"
                            class="form-control"
-                           id="urlIMAGE"
+                           id="urlImg"
                            ng-model="model.widget.url">
                 </div>
                 <div class="form-group">
-                    <label for="widthIMAGE">Width</label>
+                    <label for="widthImg">Width</label>
                     <input type="text"
                            class="form-control"
-                           id="widthIMAGE"
+                           id="widthImg"
+                           placeholder="100%"
                            ng-model="model.widget.width">
                 </div>
-                <div class="form-group">
-                    <label for="uploadIMAGE">Upload</label>
-                    <input type="file"
-                           class="form-control"
-                           id="uploadIMAGE">
-                </div>
+
+            </form>
+            <form action="/api/upload"  method="post" enctype="multipart/form-data">
+                <input  name="myFile"   type="file" class="form-control"/>
+                <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+                <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+                <input  name="pageId" value="{{model.pageId}}" style="display: none"/>
+                <input  name="websiteId" value="{{model.websiteId}}" style="display: none"/>
+                <input  name="userId" value="{{model.userId}}" style="display: none"/>
+                <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
             </form>
         </div>
+
         <div ng-switch-when="YOUTUBE">
             <!-- <div ng­include="'/assignment/views/widget/widget­youtube.view.client.html'"></div> -->
             <form>
@@ -161,6 +166,5 @@
     </div>
 
     <a ng-click="model.deleteWidget()"
-       href=""
        class="btn btn-block btn-danger">Delete</a>
 </div>

@@ -11,6 +11,8 @@
         function init() {
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
+            vm.pageId = $routeParams["pid"];
+            console.log(vm.pageId);
             WebsiteService
                 .findWebsiteById(vm.websiteId)
                 .then(

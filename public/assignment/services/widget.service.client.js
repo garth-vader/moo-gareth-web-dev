@@ -33,7 +33,7 @@
 
         function updateWidget(widgetId, widget) {
             var url = "/api/widget/"+widgetId;
-            return $http.post(url, widget);
+            return $http.put(url, widget);
         }
 
 
