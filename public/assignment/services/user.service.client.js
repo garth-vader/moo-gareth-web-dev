@@ -22,7 +22,7 @@
                 username: username,
                 password: password
             };
-            return $http.post(url, username);
+            return $http.post(url, user);
 
         }
 
