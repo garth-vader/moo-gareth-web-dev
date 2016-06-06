@@ -76,6 +76,7 @@ module.exports = function(app) {
             res.send(users);
         }
     }
+
     function findUserByCredentials(username, password, res) {
         for(var u in users) {
             if(users[u].username === username && users[u].password === password) {
@@ -83,8 +84,9 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(403);
+        res.sendStatus(403);
     }
+    
     function findUserByUsername(username, res) {
         for(var u in users) {
             if(users[u].username === username) {

@@ -9,7 +9,11 @@
         vm.userId = userId;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(userId);
+            WebsiteService
+                .findWebsitesByUser(userId)
+                .then(function(response) {
+                     vm.websites = response.data;
+                });
         }
         init();
     }
