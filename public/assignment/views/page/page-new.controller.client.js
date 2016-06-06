@@ -19,16 +19,18 @@
                 vm.error = "No Page Name";
                 return false;
             }
-
-            page._id = (new Date()).getTime().toString();
             page.name = name;
             page.title = title;
-            if(PageService.createPage(vm.websiteId, page)) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            } else {
-                vm.error = "Problems Creating Website";
-                return false;
-            }
+            page.websiteId = vm.websiteId;
+            PageService
+                .createPage(vm.websiteId, page)
+                .then(
+                    function(response) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                },
+                    function(error) {
+                    vm.error = error.data;
+            });
         }
     }
 })();

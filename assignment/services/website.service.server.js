@@ -21,12 +21,12 @@ module.exports = function(app) {
     function createWebsite(req, res) {
         var newWebsite = req.body;
         for(var i in websites) {
-            if(websites[i].name === newWebsite.name && websites[i].developerId === newWebsite.developerId) {
+            if(websites[i].name === newWebsite.name &&
+                websites[i].developerId === newWebsite.developerId) {
                 res.status(400).send("Website " + newWebsite.name + " already exists");
                 return;
             }
         }
-
         newWebsite._id = (new Date()).getTime() + "";
         websites.push(newWebsite);
         res.json(newWebsite);
@@ -59,14 +59,14 @@ module.exports = function(app) {
     }
 
     function findWebsiteById(req, res) {
-        var websiteId = req.params.websiteId;
+        var id = req.params.websiteId;
         for(var i in websites) {
-            if(websiteId === websites[i]._id) {
+            if(id === websites[i]._id) {
                 res.json(websites[i]);
                 return;
             }
         }
-        res.status(400).send("Unable to find website with id: "+websiteId);
+        res.status(400).send("Unable to find website with id: "+id);
     }
 
     function findAllWebsitesForUser(req, res) {

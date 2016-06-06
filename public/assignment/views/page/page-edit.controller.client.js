@@ -12,7 +12,13 @@
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
             vm.pageId = $routeParams["pid"];
-            vm.page = PageService.findPageById(vm.pageId);
+            PageService
+                .findPageById(vm.pageId)
+                .then(
+                    function(response) {
+                        vm.page = response.data;
+                    }
+                );
         }
         init();
 
@@ -21,24 +27,27 @@
                 vm.error = "Page Name is Empty";
                 return false;
             }
-            if (PageService.updatePage(vm.pageId, vm.page)) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                return true;
-            } else {
-                vm.error = "Unable to update page";
-                return false;
-            }
-
+            PageService
+                .updatePage(vm.pageId, vm.page)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    });
         }
 
         function deletePage() {
-            if (PageService.deletePage(vm.pageId)) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                return true;
-            } else {
-                vm.error = "Unable to Delete page";
-                return false;
-            }
+            PageService
+                .deletePage(vm.pageId)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                },
+                    function(error) {
+                        vm.error = error.data;
+            });
         }
     }
 })();
