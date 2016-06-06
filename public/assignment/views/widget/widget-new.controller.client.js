@@ -13,16 +13,19 @@
 
         function createWidget(widgetType) {
             var newWidget = {
-                _id: (new Date()).getTime().toString(),
                 widgetType: widgetType
             };
-            if(WidgetService.createWidget(vm.pageId, newWidget)) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId +
-                    "/widget/" + newWidget._id);
-            } else {
-                vm.error = "Unable to Create widget";
-                return false;
-            }
+
+            WidgetService
+                .createWidget(vm.pageId, newWidget)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId +
+                            "/widget/" + newWidget._id);
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    });
         }
     }
 })();

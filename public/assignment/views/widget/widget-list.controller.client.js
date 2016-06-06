@@ -9,7 +9,16 @@
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
-        vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+        function init() {
+            WidgetService
+                .findWidgetsByPageId(vm.pageId)
+                .then(
+                    function(response) {
+                        vm.widgets = response.data;
+                    }
+                );
+        }
+
 
         vm.getTrustedHtml = getTrustedHtml;
         vm.getTrustedUrl = getTrustedUrl;
