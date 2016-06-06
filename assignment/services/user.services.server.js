@@ -7,8 +7,52 @@ module.exports = function(app) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
 
+    app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
+    app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
+
+    function createUser(req, res) {
+        var newUser = req.body;
+
+        for(var i in users) {
+            if(users[i].username === newUser.username) {
+                res.status(400).send("Username " + newUser.username + " is already in use");
+                return;
+            }
+        }
+
+        newUser._id = (new Date()).getTime() + "";
+        users.push(newUser);
+        res.json(newUser);
+    }
+
+    function deleteUser(req, res) {
+        var id = req.params.userId;
+        for(var i in users) {
+            if(users[i]._id === id) {
+                users.splice(i, 1);
+                res.send(200);
+                return;
+            }
+        }
+        res.status(404).send("Unable to remove user with ID: " + id);
+    }
+
+    function updateUser(req, res) {
+        var id = req.params.userId;
+        var newUser = req.body;
+        for(var i in users) {
+            if(users[i]._id === id) {
+                users[i].firstName = newUser.firstName;
+                users[i].lastName = newUser.lastName;
+                res.send(200);
+                return;
+            }
+        }
+        res.status(400).send("User with ID: "+ id +" not found");
+    }
 
     function findUserById(req, res) {
         var userId = req.params.userId;
@@ -39,7 +83,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send({});
+        res.send(403);
     }
     function findUserByUsername(username, res) {
         for(var u in users) {
