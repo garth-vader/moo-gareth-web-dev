@@ -5,13 +5,13 @@
 
     function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
-        var userId = $routeParams["uid"];
-        vm.userId = userId;
+        vm.userId = $routeParams["uid"];
 
         function init() {
             WebsiteService
-                .findWebsitesByUser(userId)
-                .then(function(response) {
+                .findWebsitesByUser(vm.userId)
+                .then(
+                    function(response) {
                      vm.websites = response.data;
                 });
         }
