@@ -8,7 +8,5 @@ module.exports = function () {
         pages: [mongoose.Schema.Types.ObjectId],
         dateCreated: {type: Date, default: Date.now},
     }, {collection: "assignment.website"});
-
-
     return WebsiteSchema;
 };

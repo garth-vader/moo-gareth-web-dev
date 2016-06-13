@@ -121,7 +121,7 @@ module.exports = function(app, models) {
                     res.json(website);
                 },
                 function(error) {
-                    res.send(result);
+                    res.sendStatus(400);
                 }
             );
 

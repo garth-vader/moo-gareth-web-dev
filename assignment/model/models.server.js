@@ -4,7 +4,7 @@ module.exports = function() {
     
     var userModel = require("./users/user.model.server.js")();
     var websiteModel = require("./website/website.model.server")();
-    var pageModel;
+    var pageModel = require("./page/page.model.server")();
     var widgetModel;
     
     var models = {
