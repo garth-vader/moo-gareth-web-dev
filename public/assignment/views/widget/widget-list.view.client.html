@@ -57,7 +57,7 @@
         <div ng-switch-when="HTML" class="ggm-widget"
              ng-bind-html="model.getTrustedHtml(widget)">
         </div>
-        <div ng-switch-when="YOUTUBE" class="ggm-widget">
+        <div ng-switch-when="YOUTUBE" class="youtube-widget">
             <iframe width="{{widget.width}}" height="auto"
                     ng-src="{{model.getTrustedUrl(widget)}}"
                     frameborder="0"
