@@ -28,6 +28,7 @@
         init();
 
         function updateWidget() {
+            
             WidgetService
                 .updateWidget(vm.widgetId, vm.widget)
                 .then(

@@ -32,7 +32,7 @@
 </nav>
 
 <div class="widget-container">
-    <div ng-repeat="widget in model.widgets" ng-switch="widget.widgetType">
+    <div ng-repeat="widget in model.widgets" ng-switch="widget.type">
         <div class="ggm-widget-tool">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>

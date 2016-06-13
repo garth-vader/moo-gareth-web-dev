@@ -13,7 +13,7 @@
 
         function createWidget(widgetType) {
             var newWidget = {
-                widgetType: widgetType,
+                type: widgetType,
                 pageId: vm.pageId
             };
 

@@ -127,7 +127,7 @@ module.exports = function(app, models) {
                     res.json(user);
                 },
                 function(error) {
-                    res.sendStatus(403);
+                    res.status(400).send("User with name: " + username + " was not found.");
                 }
             );
         // for(var u in users) {

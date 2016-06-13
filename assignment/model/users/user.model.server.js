@@ -45,6 +45,6 @@ module.exports = function() {
     }
 
     function deleteUser(userId) {
-        return User.deleteUser(userId);
+        return User.remove(userId);
     }
-}
+};
