@@ -23,9 +23,9 @@ module.exports = function(app, models) {
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
+    app.put("/api/page/:pageId/widget", reorderWidgets);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
-
 
 
     function uploadImage(req, res) {
@@ -181,5 +181,23 @@ module.exports = function(app, models) {
         //     }
         // }
         // res.status(404).send("Widget "+widgetId+" not found");
+    }
+
+    function reorderWidgets(req, res) {
+        var start = req.query.start;
+        var end = req.query.end;
+        var pageId = req.params.pageId;
+
+        widgetModel
+            .reorderWidgets(pageId, start, end)
+            .then(
+                function (widget) {
+                    res.send(widget);
+                },
+                function (error) {
+                    res.status(400).send("reorder failed");
+                }
+            );
+
     }
 };

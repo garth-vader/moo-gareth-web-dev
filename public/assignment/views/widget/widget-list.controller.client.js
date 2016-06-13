@@ -6,6 +6,7 @@
     function WidgetListController($routeParams, $sce, WidgetService) {
         var vm = this;
 
+
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
@@ -19,6 +20,11 @@
                 );
         }
         init();
+        
+        $(".widget-container")
+        // .draggable()
+            .sortable({axis: "y"});
+
 
         vm.getTrustedHtml = getTrustedHtml;
         vm.getTrustedUrl = getTrustedUrl;
@@ -35,9 +41,19 @@
             var url = "https://www.youtube.com/embed/" + id;
             return $sce.trustAsResourceUrl(url);
         }
-        $(".widget-container")
-           // .draggable()
-            .sortable({axis: "y"});
+        
+        function sortList(start, stop) {
+            WidgetService
+                .reorderWidgets(vm.pageId, start, stop)
+                .then(
+                    function(res) {
+                        vm.widgets = res.data;
+                    },
+                    function (error) {
+                        vm.error = error.data;
+                    }
+                );
+        }
 
 
     }

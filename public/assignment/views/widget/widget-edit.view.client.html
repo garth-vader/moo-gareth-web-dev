@@ -139,6 +139,58 @@
                 </div>
             </form>
         </div>
+
+        <div ng-switch-when="HTML">
+            <div class="form-group">
+                <label for="nameHTML">Name</label>
+                <input type="text"
+                       class="form-control"
+                       id="nameHTML"
+                       ng-model="model.widget.name">
+            </div>
+            <div  text-angular
+                  ng-model="model.widget.text"
+                  ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'], ['indent','outdent'],['html']]">
+            </div>
+        </div>
+        <div ng-switch-when="TEXT">
+            <form>
+                <div class="form-group">
+                    <label for="nameTEXT">Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="nameTEXT"
+                           ng-model="model.widget.name">
+                </div>
+                <div class="form-group">
+                    <label for="textTEXT">Text</label>
+                    <input type="text"
+                           class="form-control"
+                           id="textTEXT"
+                           ng-model="model.widget.text">
+                </div>
+                <div class="form-group">
+                    <label for="rowsTEXT">Rows</label>
+                    <input ng-model="model.widget.rows"
+                           class="form-control"
+                           type="number"
+                           id="rowsTEXT">
+                </div>
+                <div class="form-group">
+                    <label for="placeholderTEXT">Placeholder</label>
+                    <input ng-model="model.widget.placeholder"
+                           class="form-control"
+                           type="text"
+                           id="placeholderTEXT">
+                </div>
+                <div class="form-group">
+                    <label for="formattedTEXT">Formatted</label>
+                    <input ng-model="model.widget.formatted"
+                           type="checkbox"
+                           id="formattedTEXT"/>
+                </div>
+            </form>
+        </div>
         <div ng-switch-default>
             <!-- <div ng­include="'/assignment/views/widget/widget­heading.view.client.html'"></div> -->
             <form>
