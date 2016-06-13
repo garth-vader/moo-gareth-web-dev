@@ -1,17 +1,18 @@
-(function() {
+(function () {
     angular
         .module("wamDirectives", [])
-        .directive("sortableContainer", SortableContainer);
-    
-    function SortableContainer() {
+        .directive("wamSort", wamSort);
+
+    function wamSort() {
         function linker(scope, element, attributes) {
             var start = -1;
             var stop = -1;
             $(element)
                 .find(".sortWidgets")
                 .sortable({
-                    start:function (event, ui) {
-                        start = ui.item.index();
+                    axis: "y",
+                    start: function (event, ui) {
+                        start =  ui.item.index();
                     },
                     stop: function (event, ui) {
                         stop = ui.item.index();
@@ -20,14 +21,13 @@
                 });
         }
         return {
-            templateUrl: "wam-directives.html",
+            templateUrl: "directives/wam-directives.html",
             scope: {
                 title: "=",
                 data: "=",
                 reorder: "&sortList"
             },
             link: linker
-            
         }
     }
-})
+})();

@@ -6,12 +6,21 @@
     <h2>Register</h2>
     <input ng-model="username" class="form-control"
            placeholder="username"
+           autocomplete="off"
+           spellcheck="false"
+           autocapitalize="off"
            type="text"/>
     <input ng-model="password" class="form-control"
            placeholder="password"
+           autocomplete="off"
+           spellcheck="false"
+           autocapitalize="off"
            type="password">
     <input ng-model="verifypassword" class="form-control"
            placeholder="verify password"
+           autocomplete="off"
+           spellcheck="false"
+           autocapitalize="off"
            type="password">
     <a class="btn btn-primary btn-block"
        ng-click="model.register(username, password, verifypassword)">Register</a>

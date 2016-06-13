@@ -5,9 +5,15 @@
     <h2>Login</h2>
     <input ng-model="username" class="form-control"
            placeholder="username"
+           autocomplete="off"
+           spellcheck="false"
+           autocapitalize="off"
            type="text"/>
     <input ng-model="password" class="form-control"
            placeholder="password"
+           autocomplete="off"
+           spellcheck="false"
+           autocapitalize="off"
            type="password">
     <a ng-click="model.login(username, password)"
        class="btn btn-primary btn-block">Login</a>

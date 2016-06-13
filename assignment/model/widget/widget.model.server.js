@@ -16,7 +16,13 @@ module.exports = function() {
 
     function createWidget(pageId, widget) {
         widget._page = pageId;
-        return Widget.create(widget);
+        return Widget
+            .find({_page: pageId})
+            .then(
+                function (widgets) {
+                    widget.order = widgets.length;
+                    return Widget.create(widget);
+                });
     }
 
     function findAllWidgetsForPage(pageId) {
@@ -42,7 +48,7 @@ module.exports = function() {
         start = parseInt(start);
         end = parseInt(end);
         return Widget
-            .find({_page: pageid})
+            .find({_page: pageId})
             .then(
                 function (widgets) {
                     for(var i in widgets) {

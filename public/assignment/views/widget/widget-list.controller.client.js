@@ -10,6 +10,7 @@
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
+        vm.sortList = sortList;
         function init() {
             WidgetService
                 .findWidgetsByPageId(vm.pageId)
@@ -20,10 +21,10 @@
                 );
         }
         init();
-        
-        $(".widget-container")
-        // .draggable()
-            .sortable({axis: "y"});
+
+        // $(".widget-container")
+        // // .draggable()
+        //     .sortable({axis: "y"});
 
 
         vm.getTrustedHtml = getTrustedHtml;
