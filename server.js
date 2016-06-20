@@ -5,6 +5,20 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var passport      = require('passport');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
+
+app.use(session({
+    secret:  'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 var assignment = require('./assignment/app.js');
 assignment(app);
 
