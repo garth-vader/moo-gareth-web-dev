@@ -28,7 +28,7 @@
                 .login(user)
                 .then(
                     function(response) {
-                        console.log(response);
+                        console.log(response.data);
                         var user = response.data;
                         if(user === null){
                             vm.error = "User not found";
@@ -38,7 +38,7 @@
                         }
                     },
                     function(error) {
-                        vm.error = "Error " + error;
+                        vm.error = "Unauthorized: Access is denied due to invalid credentials";
                     })
         }
     }
