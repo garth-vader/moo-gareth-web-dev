@@ -8,7 +8,12 @@ module.exports = function() {
         lastName: String,
         email: String,
         websites: [mongoose.Schema.Types.ObjectId],
-        dateCreate: {type: Date, default: Date.now()}
+        dateCreate: {type: Date, default: Date.now()},
+        facebook: {
+            id:    String,
+            token: String,
+            displayName: String
+        }
     }, {collection: "assignment.user"});
     return UserSchema
 };

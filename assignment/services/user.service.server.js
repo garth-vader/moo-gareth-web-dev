@@ -3,7 +3,14 @@ module.exports = function(app, models) {
     var userModel = models.userModel;
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
+
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
 
     // var users = [
     //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -23,7 +30,15 @@ module.exports = function(app, models) {
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
 
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }))
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/assignment/#/user',
+            failureRedirect: '/assignment/#/login'
+        }));
+
     passport.use('wam', new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -61,6 +76,7 @@ module.exports = function(app, models) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
+
     function serializeUser(user, done) {
         done(null, user);
     }
@@ -94,6 +110,35 @@ module.exports = function(app, models) {
                 },
                 function(err) {
                     if (err) { return done(err); }
+                }
+            );
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        var id = profile.id;
+        userModel
+            .findUserByFacebookId(id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var user = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            facebook: {
+                                id: profile.id,
+                                displayName: profile.displayName,
+                                token: token
+                            }
+                        };
+                        return userModel
+                            .createUser(user);
+                    }
+                }
+            )
+            .then(
+                function (user) {
+                    return done(null, user);
                 }
             );
     }

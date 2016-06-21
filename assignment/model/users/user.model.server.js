@@ -7,6 +7,7 @@ module.exports = function() {
     var api = {
         createUser: createUser,
         findUserById: findUserById,
+        findUserByFacebookId: findUserByFacebookId,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
@@ -20,6 +21,10 @@ module.exports = function() {
 
     function findUserById(userId) {
         return User.findById(userId);
+    }
+
+    function findUserByFacebookId(facebookId) {
+        return User.findOne({facebook: {id: facebookId}});
     }
 
     function findUserByUsername(username) {
