@@ -28,7 +28,7 @@
                 .login(user)
                 .then(
                     function(response) {
-                        console.log(response.data);
+                        //console.log(response.data);
                         var user = response.data;
                         if(user === null){
                             vm.error = "User not found";
@@ -57,7 +57,7 @@
             return false;
         }
         UserService
-            .createUser(username, password)
+            .register(username, password)
             .then (
                 function(response) {
                     var user = response.data;
@@ -65,8 +65,9 @@
                         vm.error = error.data;
                     } else {
                         $rootScope.currentUser = user;
+                        $location.url("/profile/"+user._id);
                         login(username, password);
-                        //$location.url("/profile/"+user._id);
+
                     }
 
                 },

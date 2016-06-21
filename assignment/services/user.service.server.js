@@ -15,6 +15,9 @@ module.exports = function(app, models) {
 
     app.post("/api/user", createUser);
     app.post("/api/login", passport.authenticate('wam'), login);
+    app.post('/api/logout', logout);
+    app.post ('/api/register', register);
+    app.get("/api/loggedin", loggedin);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
@@ -28,6 +31,34 @@ module.exports = function(app, models) {
     function login(req, res) {
         var user = req.user;
         res.json(user);
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.sendStatus(200);
+    }
+
+    function register (req, res) {
+        var user = req.body;
+        userModel
+            .createUser(user)
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                }
+            );
+    }
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function serializeUser(user, done) {
@@ -49,7 +80,7 @@ module.exports = function(app, models) {
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function(user) {
                     if (user == null) {
@@ -80,16 +111,16 @@ module.exports = function(app, models) {
                 }
             );
 
-/*        for(var i in users) {
-            if(users[i].username === newUser.username) {
-                res.status(400).send("Username " + newUser.username + " is already in use");
-                return;
-            }
-        }
+        /*        for(var i in users) {
+         if(users[i].username === newUser.username) {
+         res.status(400).send("Username " + newUser.username + " is already in use");
+         return;
+         }
+         }
 
-        newUser._id = (new Date()).getTime() + "";
-        users.push(newUser);
-        res.json(newUser);*/
+         newUser._id = (new Date()).getTime() + "";
+         users.push(newUser);
+         res.json(newUser);*/
     }
 
     function deleteUser(req, res) {
@@ -104,14 +135,14 @@ module.exports = function(app, models) {
                     res.status(404).send("Unable to remove user with ID: " + id);
                 }
             );
-/*        for(var i in users) {
-            if(users[i]._id === id) {
-                users.splice(i, 1);
-                res.send(200);
-                return;
-            }
-        }
-        res.status(404).send("Unable to remove user with ID: " + id);*/
+        /*        for(var i in users) {
+         if(users[i]._id === id) {
+         users.splice(i, 1);
+         res.send(200);
+         return;
+         }
+         }
+         res.status(404).send("Unable to remove user with ID: " + id);*/
     }
 
     function updateUser(req, res) {
@@ -127,15 +158,15 @@ module.exports = function(app, models) {
                     res.status(400).send("User with ID: "+ id +" not found");
                 }
             );
-/*        for(var i in users) {
-            if(users[i]._id === id) {
-                users[i].firstName = newUser.firstName;
-                users[i].lastName = newUser.lastName;
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.status(400).send("User with ID: "+ id +" not found");*/
+        /*        for(var i in users) {
+         if(users[i]._id === id) {
+         users[i].firstName = newUser.firstName;
+         users[i].lastName = newUser.lastName;
+         res.sendStatus(200);
+         return;
+         }
+         }
+         res.status(400).send("User with ID: "+ id +" not found");*/
     }
 
     function findUserById(req, res) {
@@ -190,7 +221,7 @@ module.exports = function(app, models) {
         // }
         // res.sendStatus(403);
     }
-    
+
     function findUserByUsername(username, res) {
         userModel
             .findUserByUsername(username)
