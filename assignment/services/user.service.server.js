@@ -139,6 +139,11 @@ module.exports = function(app, models) {
                         return userModel.createUser(newUser);
                     }
                 }
+            )
+            .then(
+                function (user) {
+                    return done(null, user);
+                }
             );
     }
 
