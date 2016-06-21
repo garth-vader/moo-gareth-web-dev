@@ -111,19 +111,23 @@ module.exports = function(app, models) {
                 function(err) {
                     if (err) { return done(err); }
                 }
+            )
+            .then(
+                function (user) {
+                    return done(null, user);
+                }
             );
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        var id = profile.id;
         userModel
-            .findUserByFacebookId(id)
+            .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
                     if(user) {
                         return done(null, user);
                     } else {
-                        var user = {
+                        var newUser = {
                             username: profile.displayName.replace(/ /g, ''),
                             facebook: {
                                 id: profile.id,
@@ -131,14 +135,8 @@ module.exports = function(app, models) {
                                 token: token
                             }
                         };
-                        return userModel
-                            .createUser(user);
+                        return userModel.createUser(newUser);
                     }
-                }
-            )
-            .then(
-                function (user) {
-                    return done(null, user);
                 }
             );
     }

@@ -24,7 +24,7 @@ module.exports = function() {
     }
 
     function findUserByFacebookId(facebookId) {
-        return User.findOne({facebook: {id: facebookId}});
+        return User.findOne({'facebook.id': facebookId});
     }
 
     function findUserByUsername(username) {
