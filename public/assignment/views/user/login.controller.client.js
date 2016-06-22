@@ -70,7 +70,7 @@
                             vm.error = error.data;
                         } else {
                             $rootScope.currentUser = user;
-                            $location.url("/profile/" + user._id);
+                            $location.url("/user/" + user._id);
                             login(username, password);
 
                         }

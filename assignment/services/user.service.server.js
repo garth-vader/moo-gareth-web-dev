@@ -121,6 +121,14 @@ module.exports = function(app, models) {
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
+        var newUser = {
+            username: profile.displayName.replace(/ /g, ''),
+            facebook: {
+                id: profile.id,
+                displayName: profile.displayName,
+                token: token
+            }
+        };
         userModel
             .findUserByFacebookId(profile.id)
             .then(
@@ -128,14 +136,6 @@ module.exports = function(app, models) {
                     if(user) {
                         return done(null, user);
                     } else {
-                        var newUser = {
-                            username: profile.displayName.replace(/ /g, ''),
-                            facebook: {
-                                id: profile.id,
-                                displayName: profile.displayName,
-                                token: token
-                            }
-                        };
                         return userModel.createUser(newUser);
                     }
                 }
@@ -178,7 +178,7 @@ module.exports = function(app, models) {
             .deleteUser(id)
             .then(
                 function(status) {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function(error) {
                     res.status(404).send("Unable to remove user with ID: " + id);
