@@ -43,6 +43,7 @@ module.exports = function() {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
+                    rating: user.rating,
                     
                 }
             }

@@ -7,7 +7,7 @@ module.exports = function() {
         firstName: String,
         lastName: String,
         email: String,
-        rating: Character,
+        rating: {type: String, default: "U"},
         tournament: [mongoose.Schema.Types.ObjectId],
         dateCreate: {type: Date, default: Date.now()},
         facebook: {

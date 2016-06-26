@@ -5,6 +5,9 @@
 
     function ProfileController($location, $routeParams, UserService, $rootScope) {
         var vm = this;
+        vm.option = [
+            "A", "B", "C", "D", "E", "U"
+        ];
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.logout = logout;
@@ -50,6 +53,7 @@
                 vm.error = "Last name is Empty";
                 return false;
             }
+            console.log(vm.user.rating);
             UserService
                 .updateUser(id, vm.user)
                 .then(

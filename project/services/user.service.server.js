@@ -33,8 +33,8 @@ module.exports = function(app, models) {
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }))
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect: '/assignment/#/user',
-            failureRedirect: '/assignment/#/login'
+            successRedirect: '/project/#/user',
+            failureRedirect: '/project/#/login'
         }));
 
     passport.use('wam', new LocalStrategy(localStrategy));

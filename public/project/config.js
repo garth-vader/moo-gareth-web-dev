@@ -47,7 +47,7 @@
                         if(user == '0') {
                             deferred.reject();
                             $rootScope.currentUser = null;
-                            $location.url("/login")
+                            $location.url("/home")
                         } else {
                             $rootScope.currentUser = user;
                             deferred.resolve();
