@@ -19,8 +19,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-var assignment = require('./assignment/app.js');
-assignment(app);
+//var assignment = require('./assignment/app.js');
+//assignment(app);
+var project = require('./project/app.js');
+project(app);
 
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
