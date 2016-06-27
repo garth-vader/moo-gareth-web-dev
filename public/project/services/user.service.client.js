@@ -43,7 +43,6 @@
                 password: password
             };
             return $http.post(url, user);
-
         }
 
         function findUserByUsername(username) {

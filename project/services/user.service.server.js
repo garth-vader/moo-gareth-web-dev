@@ -160,16 +160,6 @@ module.exports = function(app, models) {
                 }
             );
 
-        /*        for(var i in users) {
-         if(users[i].username === newUser.username) {
-         res.status(400).send("Username " + newUser.username + " is already in use");
-         return;
-         }
-         }
-
-         newUser._id = (new Date()).getTime() + "";
-         users.push(newUser);
-         res.json(newUser);*/
     }
 
     function deleteUser(req, res) {
@@ -184,14 +174,6 @@ module.exports = function(app, models) {
                     res.status(404).send("Unable to remove user with ID: " + id);
                 }
             );
-        /*        for(var i in users) {
-         if(users[i]._id === id) {
-         users.splice(i, 1);
-         res.send(200);
-         return;
-         }
-         }
-         res.status(404).send("Unable to remove user with ID: " + id);*/
     }
 
     function updateUser(req, res) {
@@ -207,15 +189,6 @@ module.exports = function(app, models) {
                     res.status(400).send("User with ID: "+ id +" not found");
                 }
             );
-        /*        for(var i in users) {
-         if(users[i]._id === id) {
-         users[i].firstName = newUser.firstName;
-         users[i].lastName = newUser.lastName;
-         res.sendStatus(200);
-         return;
-         }
-         }
-         res.status(400).send("User with ID: "+ id +" not found");*/
     }
 
     function findUserById(req, res) {
@@ -230,13 +203,7 @@ module.exports = function(app, models) {
                     res.status(400).send(error);
                 }
             );
-// /*        for(var i in users) {
-//             if(userId === users[i]._id) {
-//                 res.send(users[i]);
-//                 return;
-//             }
-//         }
-//         res.send({});*/
+
     }
 
     function getUsers(req, res) {
@@ -262,13 +229,6 @@ module.exports = function(app, models) {
                     res.status(400).send("User with name: " + username + " was not found.");
                 }
             );
-        // for(var u in users) {
-        //     if(users[u].username === username && users[u].password === password) {
-        //         res.send(users[u]);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(403);
     }
 
     function findUserByUsername(username, res) {
@@ -282,12 +242,5 @@ module.exports = function(app, models) {
                     res.sendStatus(403);
                 }
             );
-        // for(var u in users) {
-        //     if(users[u].username === username) {
-        //         res.send(users[u]);
-        //         return;
-        //     }
-        // }
-        // res.send({});
     }
 };

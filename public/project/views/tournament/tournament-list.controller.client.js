@@ -3,21 +3,23 @@
         .module("WebAppMaker")
         .controller("TournamentListController", TournamentListController);
 
-    function TournamentListController($location, $routeParams, $rootScope, TournamentService) {
+    function TournamentListController($location, $routeParams, $rootScope, TournamentService, UserService) {
         var vm = this;
-        vm.myTournaments =[
-            {name: "blah", location: "somwhere"},
-            {name: "blash2", location: "awoefij"}
-        ];
-        var id = $rootScope.currentUser._id;
+
+        var userId = $rootScope.currentUser._id;
 
         function init() {
-            // TournamentService
-            //     .findTournamentsByUser(id)
-            //     .then(
-            //         function(resp) {
-            //             vm.myTournaments = resp.data;
-            //         });
+            UserService
+                .findUserById(userId)
+                .then(function (resp) {
+                    vm.user = resp.data;
+                });
+            TournamentService
+                .findTournamentByUser(userId)
+                .then(
+                    function(resp) {
+                        vm.myTournaments = resp.data;
+                    });
             // TournamentService
             //     .findTournaments()
             //     .then(

@@ -39,9 +39,17 @@
                     loggedin: checkLoggedIn
                 }
             })
-            .when("/user/:uid/tournament/:tid", {
+            .when("/user/:uid/tournament/new", {
                 templateUrl: "views/tournament/tournament-new.view.client.html",
-                controller: "TournamentNewController",
+                controller: "NewTournamentController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedIn
+                }
+            })
+            .when("/user/:uid/tournament/:tid", {
+                templateUrl: "views/tournament/tournament-edit.view.client.html",
+                controller: "TournamentEditController",
                 controllerAs: "model",
                 resolve: {
                     loggedin: checkLoggedIn
@@ -78,5 +86,6 @@
 
             return deferred.promise;
         }
+        
     }
 })();

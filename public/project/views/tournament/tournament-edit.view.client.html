@@ -9,12 +9,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <p class="navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}/tournament/new" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus">
-                    </span>
-                </a>
-            </p>
             <a class="navbar-brand topnav" href="#home">F Tourney</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,15 +36,30 @@
     <!-- /.container -->
 </nav>
 
-
 <div class="container">
-    <ul class="list-group">
-        <h4>Your Tournaments</h4>
-        <li ng-repeat="tournament in model.myTournaments" class="list-group-item">
-            <a href="#/user/{{model.userId}}/tournament/{{tournament._id}}/">{{tournament.name}}</a>
-            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-    </ul>
+    <form>
+        <div ng-if="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+        <div class="form-group">
+            <label for="name">Website Name</label>
+            <input ng-model="model.tourn.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Blog to End ALL Blogs"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Website Description</label>
+            <textarea ng-model="model.tourn.description"
+                      rows="5"
+                      id="description"
+                      class="form-control">
+                Cardigan stumptown fixie pork belly est tofu. Kickstarter bicycle rights heirloom, tacos aesthetic letterpress celiac jean shorts elit plaid iPhone. Artisan deep v hella, banh mi direct trade nostrud tofu sapiente lo-fi voluptate exercitation jean shorts kombucha ea. Duis meditation next level pug, sartorial photo booth id fap locavore YOLO minim cillum austin placeat. Tote bag aliquip kickstarter, helvetica master cleanse man bun franzen freegan godard consequat assumenda cardigan poutine. Try-hard est occupy, church-key schlitz nostrud raw denim excepteur culpa typewriter mustache. Mollit tofu fap, nesciunt qui viral do blog bitters.
+            </textarea>
+        </div>
+    </form>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWebsite()"
+       href="">Delete</a>
 </div>

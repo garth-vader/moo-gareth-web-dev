@@ -9,15 +9,20 @@ module.exports = function() {
         findTournamentById: findTournamentById,
         // findTournamentByName: findTournamentByName,
         // checkinByUser: checkinByUser,
+        findAllTournamentForUser: findAllTournamentForUser,
         updateTournament: updateTournament,
         deleteTournament: deleteTournament
     };
     return api;
 
-    function createTournament(Tournament) {
-        return Tournament.create(Tournament);
+    function createTournament(userId, tournament) {
+        tournament._creator = userId;
+        return Tournament.create(tournament);
     }
 
+    function findAllTournamentForUser(userId) {
+        return Tournament.find({_creator: userId});
+    }
     function findTournamentById(TournamentId) {
         return Tournament.findById(TournamentId);
     }

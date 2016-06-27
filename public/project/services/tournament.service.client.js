@@ -5,13 +5,23 @@
 
     function TournamentService($http) {
         var api = {
-            // createWebsite: createWebsite,
-            // findWebsitesByUser: findWebsitesByUser,
-            // findWebsiteById: findWebsiteById,
-            // updateWebsite: updateWebsite,
-            // deleteWebsite: deleteWebsite
+            createTournament: createTournament,
+            findTournamentByUser: findTournamentByUser,
+            //findTournamentById: findTournamentById,
+            //updateTournament: updateTournament,
+            //deleteTournament: deleteTournament
         };
         return api;
+
+        function createTournament(userId,tourn) {
+            var url = "/api/user/"+userId+"/tournament";
+            return $http.post(url,tourn);
+        }
+
+        function findTournamentByUser(userId) {
+            var url = "/api/user/"+userId+"/tournament";
+            return $http.get(url);
+        }
 
 
 

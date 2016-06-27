@@ -10,8 +10,8 @@
                 <span class="icon-bar"></span>
             </button>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateUser()" class="navbar-link">
-                    <span class="glyphicon glyphicon-ok">
+                <a ng-click="model.createTournament(name, description)" href="" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus">
                     </span>
                 </a>
             </p>
@@ -42,67 +42,60 @@
     <!-- /.container -->
 </nav>
 
-<div class="ggm-container">
-    <div ng-show="model.success" class="alert alert-success">
-        {{model.success}}
-    </div>
-
-    <div ng-show="model.error" class="alert alert-danger">
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
-
     <form>
         <div class="form-group">
-            <label for="username">Username</label>
-            <input ng-model="model.user.username"
+            <label for="name">Tournament Name</label>
+            <input ng-model="name"
                    type="text"
                    class="form-control"
-                   id="username"
-                   placeholder="UserName"/>
+                   id="name"
+                   placeholder="Name"/>
         </div>
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input ng-model="model.user.email"
-                   type="email"
-                   class="form-control"
-                   id="email"
-                   placeholder="Email@Email.com"/>
-        </div>
-        <div class="form-group">
-            <label for="first">First Name</label>
-            <input ng-model="model.user.firstName"
+            <label for="location">Tournament Name</label>
+            <input ng-model="location"
                    type="text"
                    class="form-control"
-                   id="first"
-                   placeholder="FirstName"/>
+                   id="location"
+                   placeholder="My Club"/>
         </div>
         <div class="form-group">
-            <label for="last">Last Name</label>
-            <input ng-model="model.user.lastName"
-                   type="text"
-                   class="form-control"
-                   id="last"
-                   placeholder="LastName"/>
+            <label for="description">Tournament Description</label>
+            <textarea ng-model="description"
+                      rows="5"
+                      id="description"
+                      class="form-control">Enter Your Description Here
+            </textarea>
         </div>
-        <div class="form-group">
-            <label for="rating">Rating</label>
-            <select class="form-control"
-                    ng-model="model.user.rating"
-                    id="rating"
-                    type="text"
-                    ng-options="values for values in model.option">
-                    <option value=""></option>
-                </select>
+        <h4>Fencers</h4>
 
-            </select>
-
-        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            <tr>
+                <th><input ng-model="fencer.name" class="form-control"/></th>
+                <!--<th><input ng-model="course.start" type="date" class="form-control"/></th>-->
+                <th>
+                    <button ng-click="model.addFencer(fencer)" class="btn btn-primary">Add</button>
+                    <!--<button ng-click="updateCourse(course)" class="btn btn-primary btn-success">Update</button>-->
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="fencer in model.fencers">
+                <td>{{fencer.fencerName}}</td>
+                <td>
+                    <button ng-click="model.removeFencer(fencer)" class="btn btn-danger">Remove</button>
+                    <!--<button ng-click="selectCourse($index)" class="btn btn-info">Select</button>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </form>
-
-    <a class="btn btn-primary btn-block"
-       href="#/user/{{model.user._id}}/tournament">Tournaments</a>
-    <a class="btn btn-danger btn-block"
-       ng-click="model.logout()">Logout</a>
-    <a class="btn btn-danger btn-block"
-        ng-click="model.deleteUser()">DELETE USER</a>
 </div>

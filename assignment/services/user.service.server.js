@@ -159,17 +159,7 @@ module.exports = function(app, models) {
                     res.status(400).send("Username " + newUser.username + " is already in use");
                 }
             );
-
-        /*        for(var i in users) {
-         if(users[i].username === newUser.username) {
-         res.status(400).send("Username " + newUser.username + " is already in use");
-         return;
-         }
-         }
-
-         newUser._id = (new Date()).getTime() + "";
-         users.push(newUser);
-         res.json(newUser);*/
+        
     }
 
     function deleteUser(req, res) {
