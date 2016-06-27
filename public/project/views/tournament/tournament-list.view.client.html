@@ -1,0 +1,46 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand"
+               href="#/user/{{model.user._id}}/">
+                Tournament List
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.createTournament()" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus">
+                    </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a class="navbar-link">
+                    <a href="#/user/{{model.user._id}}/">
+                        <span class="glyphicon glyphicon-user">
+                        </span>
+                    </a>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <ul class="list-group">
+        <h4>Your Tournaments</h4>
+        <li ng-repeat="tournament in model.myTournaments" class="list-group-item">
+            <a href="#/user/{{model.userId}}/tournament/{{tournament._id}}/">{{tournament.name}}</a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+        </li>
+    </ul>
+</div>

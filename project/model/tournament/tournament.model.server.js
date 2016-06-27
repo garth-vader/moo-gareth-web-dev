@@ -5,51 +5,36 @@ module.exports = function() {
     var Tournament = mongoose.model("Tournament", TournamentSchema);
 
     var api = {
-        createUser: createUser,
-        findUserById: findUserById,
-        findUserByFacebookId: findUserByFacebookId,
-        findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials,
-        updateUser: updateUser,
-        deleteUser: deleteUser
+        createTournament: createTournament,
+        findTournamentById: findTournamentById,
+        // findTournamentByName: findTournamentByName,
+        // checkinByUser: checkinByUser,
+        updateTournament: updateTournament,
+        deleteTournament: deleteTournament
     };
     return api;
 
-    function createUser(user) {
-        return User.create(user);
+    function createTournament(Tournament) {
+        return Tournament.create(Tournament);
     }
 
-    function findUserById(userId) {
-        return User.findById(userId);
+    function findTournamentById(TournamentId) {
+        return Tournament.findById(TournamentId);
     }
 
-    function findUserByFacebookId(facebookId) {
-        return User.findOne({'facebook.id': facebookId});
-    }
-
-    function findUserByUsername(username) {
-        return User.findOne({username: username});
-    }
-
-    function findUserByCredentials(username, password) {
-        return User.findOne({username: username, password: password});
-    }
-
-    function updateUser(userId, user) {
-        return User.update(
-            {_id: userId},
+    function updateTournament(TournamentId, Tournament) {
+        return Tournament.update(
+            {_id: TournamentId},
             {$set :
             {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
+
 
             }
             }
         )
     }
 
-    function deleteUser(userId) {
-        return User.remove(userId);
+    function deleteTournament(TournamentId) {
+        return Tournament.remove(TournamentId);
     }
 };

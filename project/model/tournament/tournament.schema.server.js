@@ -3,17 +3,11 @@ module.exports = function() {
 
     var TournamentSchema = mongoose.Schema({
         name: String,
-        password: String,
-        firstName: String,
-        lastName: String,
-        email: String,
-        tournament: [mongoose.Schema.Types.ObjectId],
+        location: String,
+
+        fencersInv: {type: mongoose.Schema.Types.ObjectId,
+                    ref: 'User'},
         dateCreate: {type: Date, default: Date.now()},
-        facebook: {
-            id:    String,
-            token: String,
-            displayName: String
-        }
-    }, {collection: "assignment.user"});
+    }, {collection: "project.tournament"});
     return TournamentSchema
 };
