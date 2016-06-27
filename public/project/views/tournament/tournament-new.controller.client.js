@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("NewTournamentController", NewTournamentController);
 
-    function NewTournamentController($location, $routeParams, TournamentService) {
+    function NewTournamentController($location, $scope, $routeParams, TournamentService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.fencers = [];
@@ -26,7 +26,7 @@
                 .createTournament(vm.userId, newTournament)
                 .then(
                     function(response) {
-                        $location.url("/user/" + vm.userId + "/Tournament");
+                        $location.url("/user/" + vm.userId + "/tournament");
                     },
                     function(error) {
                         vm.error = error.data;
@@ -36,12 +36,18 @@
 
         function addFencer(fencer) {
             if(fencer == null) return;
+            for(f in vm.fencers) {
+                if(fencer.name == vm.fencers[f].fencerName) {
+                    vm.error = "Fencer already added!";
+                    return;
+                }
+            }
             var newFencer = {
                 fencerName: fencer.name,
                 checkedIn: false
             };
+            $scope.fencer = null;
             vm.fencers.push(newFencer);
-            console.log(vm.fencers);
         }
 
         function removeFencer(fencer) {
