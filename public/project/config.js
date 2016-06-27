@@ -39,6 +39,14 @@
                     loggedin: checkLoggedIn
                 }
             })
+            .when("/user/:uid/tournament/:tid", {
+                templateUrl: "views/tournament/tournament-new.view.client.html",
+                controller: "TournamentNewController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedIn
+                }
+            })
             .otherwise({
                 templateUrl: "views/home/home.view.client.html",
                 controller: "LoginController",

@@ -16,12 +16,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#login">login</a>
-                </li>
-                <li>
-                    <a href="#register">register</a>
-                </li>
+                 <span ng-hide="currentUser">
+                    <li>
+                        <a href="#login">login</a>
+                    </li>
+                     <li>
+                        <a href="#register">register</a>
+                    </li>
+                </span>
+                <span ng-show="currentUser">
+                    <li>
+                        <a href="#user/{{model.user._id}}/tournament">tournaments</a>
+                    </li>
+                    <li>
+                        <a href="#user">profile</a>
+                    </li>
+                    <li>
+                        <a ng-click="model.logout()">logout</a>
+                    </li>
+                </span>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -44,8 +57,8 @@
                     <ul class="list-inline intro-social-buttons">
                         <li>
                             <a href="https://github.com/garth-vader/moo-gareth-web-dev" class="btn btn-default btn-lg">
-                            <i class="fa fa-github fa-fw"></i>
-                            <span class="network-name">Github</span></a>
+                                <i class="fa fa-github fa-fw"></i>
+                                <span class="network-name">Github</span></a>
                         </li>
                     </ul>
                 </div>

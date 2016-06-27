@@ -1,3 +1,4 @@
+<!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -13,14 +14,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#login">Login</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#register">register</a>
-                </li>
+                 <span ng-hide="currentUser">
+                    <li>
+                        <a href="#login">login</a>
+                    </li>
+                     <li>
+                        <a href="#register">register</a>
+                    </li>
+                </span>
+                <span ng-show="currentUser">
+                    <li>
+                        <a href="#user/{{model.user._id}}/tournament">tournaments</a>
+                    </li>
+                    <li>
+                        <a href="#user">profile</a>
+                    </li>
+                    <li>
+                        <a ng-click="model.logout()">logout</a>
+                    </li>
+                </span>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

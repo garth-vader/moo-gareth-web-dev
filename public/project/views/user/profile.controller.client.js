@@ -53,7 +53,6 @@
                 vm.error = "Last name is Empty";
                 return false;
             }
-            console.log(vm.user.rating);
             UserService
                 .updateUser(id, vm.user)
                 .then(

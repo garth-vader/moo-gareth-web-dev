@@ -9,6 +9,7 @@
 
         vm.login = login;
         vm.register = register;
+        vm.logout = logout;
 
         function login(username, password) {
             if (username === "" || username === undefined) {
@@ -78,6 +79,18 @@
                     },
                     function (error) {
                         vm.error = error.data;
+                    }
+                );
+        }
+
+        function logout() {
+            UserService
+                .logout(vm.user)
+                .then(
+                    function(response) {
+                        console.log(response.data);
+                        $rootScope.currentUser = null;
+                        $location.url("/");
                     }
                 );
         }
