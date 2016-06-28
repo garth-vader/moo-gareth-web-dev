@@ -4,13 +4,13 @@
         .module("WebAppMaker")
         .controller("TournamentEditController", TournamentEditController);
 
-    function TournamentEditController($scope, $rootScope, $routeParams, TournamentService) {
+    function TournamentEditController($scope, $rootScope, $routeParams, TournamentService, UserService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.user = $rootScope.currentUser;
 
         vm.addFencer = addFencer;
-        //vm.updateFencer = updateFencer;
+        vm.search = search;
         vm.removeFencer = removeFencer;
         vm.updateTournament = updateTournament;
 
@@ -34,23 +34,41 @@
         };
         init();
 
+        function search(name) {
+            if (name === null) return;
+            UserService.search(name)
+                .then(
+                    function(resp) {
+                        vm.users = resp.data;
+                        $scope.text =null;
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
+        }
+
+
         function addFencer(fencer) {
             if(fencer == null) return;
             for(var i in vm.fencers) {
-                if(fencer.name == vm.fencers[i].name) {
+                if(fencer.username == vm.fencers[i].fencer.username) {
                     vm.error = "Fencer already added!";
                     return;
                 }
             }
             var newFencer = {
-                name: fencer.name,
+                fencer: fencer,
                 checkedIn: false
             };
-            $scope.fencer = null;
+            // console.log(newFencer);
             vm.fencers.push(newFencer);
+            console.log(vm.fencers);
+            return;
         }
 
         function removeFencer(fencer) {
+            // console.log(vm.fencers);
             var index = vm.fencers.indexOf(fencer);
             vm.fencers.splice(index,1);
         }

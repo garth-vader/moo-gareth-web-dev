@@ -25,7 +25,15 @@ module.exports = function() {
         return Tournament.find({_creator: userId});
     }
     function findTournamentById(tournamentId) {
-        return Tournament.findById(tournamentId);
+        return Tournament
+            .findById(tournamentId)
+            .populate({
+                path: 'fencers',
+                populate: {
+                    path: 'fencer',
+                    model: 'User'
+                }
+            });
     }
 
     function updateTournament(tournamentId, tournament) {
