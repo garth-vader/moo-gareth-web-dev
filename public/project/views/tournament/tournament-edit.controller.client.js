@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("TournamentEditController", TournamentEditController);
 
-    function TournamentEditController($location, $scope, $rootScope, $routeParams, TournamentService) {
+    function TournamentEditController($scope, $rootScope, $routeParams, TournamentService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.user = $rootScope.currentUser;

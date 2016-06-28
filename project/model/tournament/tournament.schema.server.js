@@ -6,13 +6,12 @@ module.exports = function() {
         name: String,
         description: String,
         location: String,
-        password: String,
         fencers: [{
             checkedIn: {
                 type: Boolean,
                 default: false
             },
-            name: String
+            name:String
         }],
         dateCreate: {type: Date, default: Date.now()},
     }, {collection: "project.tournament"});

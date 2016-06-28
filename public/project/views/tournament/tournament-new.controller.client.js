@@ -11,7 +11,6 @@
         vm.fencers = [];
         vm.createTournament = createTournament;
         vm.addFencer = addFencer;
-        //vm.updateFencer = updateFencer;
         vm.removeFencer = removeFencer;
 
 
@@ -35,6 +34,7 @@
                     }
                 );
         }
+        
 
         function addFencer(fencer) {
             if(fencer == null) return;

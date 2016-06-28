@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("TournamentListController", TournamentListController);
 
-    function TournamentListController($location, $routeParams, $rootScope, TournamentService, UserService) {
+    function TournamentListController($rootScope, TournamentService, UserService) {
         var vm = this;
 
         var userId = $rootScope.currentUser._id;

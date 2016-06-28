@@ -18,6 +18,7 @@ module.exports = function() {
     function createTournament(userId, tournament) {
         tournament._creator = userId;
         return Tournament.create(tournament);
+
     }
 
     function findAllTournamentForUser(userId) {

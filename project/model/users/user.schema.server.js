@@ -8,6 +8,7 @@ module.exports = function() {
         lastName: String,
         email: String,
         rating: {type: String, default: "U"},
+        userType: {type: String, enum: ['REF','FENCER'], default: 'FENCER'},
         tournament: [mongoose.Schema.Types.ObjectId],
         dateCreate: {type: Date, default: Date.now()},
         facebook: {

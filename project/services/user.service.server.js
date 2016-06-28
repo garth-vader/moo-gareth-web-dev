@@ -12,18 +12,12 @@ module.exports = function(app, models) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL
     };
 
-    // var users = [
-    //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-    //     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    //     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    // ];
-
 
     app.post("/api/user", createUser);
     app.post("/api/login", passport.authenticate('wam'), login);
     app.post('/api/logout', logout);
     app.post ('/api/register', register);
+    app.get("/api/user/search/:text", search);
     app.get("/api/loggedin", loggedin);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
@@ -62,20 +56,7 @@ module.exports = function(app, models) {
             .then(
                 function(resp) {
                     if (resp == null) {
-                        userModel.createUser(user)
-                            .then(
-                                function(user){
-                                    if(user){
-                                        req.login(user, function(err) {
-                                            if(err) {
-                                                res.status(400).send(err);
-                                            } else {
-                                                res.json(user);
-                                            }
-                                        });
-                                    }
-                                }
-                            );
+                        createUser(user);
                     } else {
                         res.status(400).send("user already exists");
                     }
@@ -83,6 +64,22 @@ module.exports = function(app, models) {
 
     }
 
+    function createUser(user) {
+        userModel.createUser(user)
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                }
+            );
+    }
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
@@ -157,21 +154,6 @@ module.exports = function(app, models) {
             );
     }
 
-    function createUser(req, res) {
-        var newUser = req.body;
-        userModel
-            .createUser(newUser)
-            .then(
-                function(user) {
-                    res.json(newUser)
-                },
-                function(error) {
-                    res.status(400).send("Username " + newUser.username + " is already in use");
-                }
-            );
-
-    }
-
     function deleteUser(req, res) {
         var id = req.params.userId;
         userModel
@@ -197,6 +179,21 @@ module.exports = function(app, models) {
                 },
                 function(error) {
                     res.status(400).send("User with ID: "+ id +" not found");
+                }
+            );
+    }
+
+    function search(req, resp) {
+        var searchText = req.params["text"];
+
+        userModel
+            .search(searchText)
+            .then(
+                function (users) {
+                    resp.json(users);
+                },
+                function (err) {
+                    resp.status(400).send(err);
                 }
             );
     }
