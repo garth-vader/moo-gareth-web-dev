@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("TournamentEditController", TournamentEditController);
 
-    function TournamentEditController($scope, $rootScope, $routeParams, TournamentService, UserService) {
+    function TournamentEditController($location, $scope, $rootScope, $routeParams, TournamentService, UserService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.user = $rootScope.currentUser;
@@ -13,6 +13,7 @@
         vm.search = search;
         vm.removeFencer = removeFencer;
         vm.updateTournament = updateTournament;
+        vm.deleteTournament = deleteTournament;
 
         function init() {
             vm.tid = $routeParams["tid"];
@@ -87,6 +88,18 @@
                         vm.error = error;
                     }
                 );
+        }
+
+        function deleteTournament() {
+            TournamentService
+                .deleteTournament(vm.tournament._id)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/tournament");
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    });
         }
     }
 })();

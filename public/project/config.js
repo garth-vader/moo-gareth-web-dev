@@ -67,7 +67,7 @@
                 controllerAs: "model"
             });
 
-        function logout(UserService, $rootScope) {
+        function logout(UserService, $rootScope, $location) {
             UserService
                 .logout()
                 .then(function(response) {

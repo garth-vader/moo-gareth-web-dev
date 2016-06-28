@@ -7,7 +7,7 @@ module.exports = function(app, models) {
     app.get("/api/user/:userId/tournament", findAllTournamentForUser);
     app.get("/api/tournament/:tournamentId", findTournamentById);
     app.put("/api/tournament/:tournamentId", updateTournament);
-    //app.delete("/api/website/:websiteId", deleteWebsite)
+    app.delete("/api/tournament/:tournamentId", deleteTournament)
 
     function findAllTournamentForUser(req, res) {
         var id = req.params.userId;
@@ -57,6 +57,20 @@ module.exports = function(app, models) {
         var newTournament = req.body;
         tournamentModel
             .updateTournament(id, newTournament)
+            .then(
+                function(resp) {
+                    res.sendStatus(200);
+                },
+                function(error) {
+                    res.status(400).send("Tournament with ID: "+ id +" not found");
+                }
+            );
+    }
+
+    function deleteTournament(req, res) {
+        var id = req.params["tournamentId"];
+        tournamentModel
+            .deleteTournament(id)
             .then(
                 function(resp) {
                     res.sendStatus(200);

@@ -9,7 +9,7 @@
             findTournamentByUser: findTournamentByUser,
             findTournamentById: findTournamentById,
             updateTournament: updateTournament,
-            //deleteTournament: deleteTournament
+            deleteTournament: deleteTournament
         };
         return api;
 
@@ -33,6 +33,10 @@
             return $http.put(url, tournament);
         }
 
+        function deleteTournament(tournId) {
+            var url = "/api/tournament/" + tournId;
+            return $http.delete(url);
+        }
 
 
 

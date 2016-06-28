@@ -44,6 +44,7 @@ module.exports = function() {
     }
 
     function deleteTournament(tournamentId) {
-        return Tournament.remove(tournamentId);
+        return Tournament.remove({_id: tournamentId});
+
     }
 };

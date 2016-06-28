@@ -50,6 +50,6 @@ module.exports = function() {
     }
 
     function deleteUser(userId) {
-        return User.remove(userId);
+        return User.remove({_id: userId});
     }
 };
