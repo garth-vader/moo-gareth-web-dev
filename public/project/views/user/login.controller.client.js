@@ -78,7 +78,7 @@
 
                     },
                     function (error) {
-                        vm.error = error.data;
+                        vm.error = "User Already Exists";
                     }
                 );
         }
