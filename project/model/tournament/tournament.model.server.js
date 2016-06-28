@@ -7,8 +7,8 @@ module.exports = function() {
     var api = {
         createTournament: createTournament,
         findTournamentById: findTournamentById,
-        // findTournamentByName: findTournamentByName,
-        // checkinByUser: checkinByUser,
+        findTournamentByFencer: findTournamentByFencer,
+        checkinFencer: checkinFencer,
         findAllTournamentForUser: findAllTournamentForUser,
         updateTournament: updateTournament,
         deleteTournament: deleteTournament
@@ -35,6 +35,15 @@ module.exports = function() {
                 }
             });
     }
+    
+    function findTournamentByFencer(userId) {
+        return Tournament.find({'fencers.fencer': userId});
+
+    }
+
+    function checkinFencer(tournamentId) {
+
+    }
 
     function updateTournament(tournamentId, tournament) {
         return Tournament.update(
@@ -45,6 +54,5 @@ module.exports = function() {
 
     function deleteTournament(tournamentId) {
         return Tournament.remove({_id: tournamentId});
-
     }
 };

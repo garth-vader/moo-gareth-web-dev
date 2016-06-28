@@ -7,6 +7,7 @@
         var api = {
             createTournament: createTournament,
             findTournamentByUser: findTournamentByUser,
+            findTournamentByFencer: findTournamentByFencer,
             findTournamentById: findTournamentById,
             updateTournament: updateTournament,
             deleteTournament: deleteTournament
@@ -20,6 +21,11 @@
 
         function findTournamentByUser(userId) {
             var url = "/api/user/"+userId+"/tournament";
+            return $http.get(url);
+        }
+
+        function findTournamentByFencer(userId) {
+            var url = "/api/tournament/fencer/"+userId;
             return $http.get(url);
         }
 

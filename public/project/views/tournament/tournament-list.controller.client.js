@@ -20,12 +20,13 @@
                     function(resp) {
                         vm.myTournaments = resp.data;
                     });
-            // TournamentService
-            //     .findTournaments()
-            //     .then(
-            //         function(resp) {
-            //             vm.tournaments = resp.data;
-            //         });
+            TournamentService
+                .findTournamentByFencer(userId)
+                .then(
+                    function(resp) {
+                        vm.regTournaments = resp.data;
+                        console.log(vm.regTournaments);
+                    });
         }
 
         init();

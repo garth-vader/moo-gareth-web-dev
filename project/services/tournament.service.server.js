@@ -6,6 +6,7 @@ module.exports = function(app, models) {
     app.post("/api/user/:userId/tournament", createTournament);
     app.get("/api/user/:userId/tournament", findAllTournamentForUser);
     app.get("/api/tournament/:tournamentId", findTournamentById);
+    app.get("/api/tournament/fencer/:userId", findTournamentByFencer);
     app.put("/api/tournament/:tournamentId", updateTournament);
     app.delete("/api/tournament/:tournamentId", deleteTournament)
 
@@ -23,6 +24,19 @@ module.exports = function(app, models) {
             );
     }
 
+    function findTournamentByFencer(req, res) {
+        var id = req.params.userId;
+        tournamentModel
+            .findTournamentByFencer(id)
+            .then(
+                function (resp) {
+                    res.json(resp);
+                },
+                function (error) {
+                    res.sendStatus(400);
+                }
+            );
+    }
     function createTournament(req, res) {
         var newTournament = req.body;
         var creatorId = req.params["userId"];
