@@ -46,7 +46,7 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
+<div class="container">'
     <div ng-if="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
@@ -102,10 +102,12 @@
         </table>
         <h4>Fencers Signed Up</h4>
 
-        <table class="table">
+        <table class="table ">
+            <thead>
             <tr>
                 <th>Name</th>
             </tr>
+            </thead>
             <tbody>
             <tr ng-repeat="fencer in model.fencers">
                 <td>{{fencer.fencer.username}}</td>

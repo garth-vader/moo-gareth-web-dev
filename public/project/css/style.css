@@ -22,7 +22,9 @@ body {
     padding-top: 60px;
     padding-bottom: 80px;
 }
-
+th {
+    width:100%;
+}
 p.navbar-text.pull-right {
     margin-right: 15px;
 }
