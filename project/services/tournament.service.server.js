@@ -8,6 +8,7 @@ module.exports = function(app, models) {
     app.get("/api/tournament/:tournamentId", findTournamentById);
     app.get("/api/tournament/fencer/:userId", findTournamentByFencer);
     app.put("/api/tournament/:tournamentId", updateTournament);
+    app.post("/api/checkin/:userId/tournament/:tournamentId", checkIn);
     app.delete("/api/tournament/:tournamentId", deleteTournament)
 
     function findAllTournamentForUser(req, res) {
@@ -71,6 +72,21 @@ module.exports = function(app, models) {
         var newTournament = req.body;
         tournamentModel
             .updateTournament(id, newTournament)
+            .then(
+                function(resp) {
+                    res.sendStatus(200);
+                },
+                function(error) {
+                    res.status(400).send("Tournament with ID: "+ id +" not found");
+                }
+            );
+    }
+
+    function checkIn(req, res) {
+        var userId = req.params["userId"];
+        var tId = req.params["tournamentId"];
+        tournamentModel
+            .checkInFencer(userId, tId)
             .then(
                 function(resp) {
                     res.sendStatus(200);

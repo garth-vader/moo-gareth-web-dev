@@ -78,14 +78,21 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>checkedin</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="fencer in model.fencers">
                 <td>{{fencer.fencer.username}}</td>
+                <td ng-if="fencer.checkedIn">
+                     <span class="glyphicon glyphicon-ok">
+                        </span>
+                </td>
             </tr>
             </tbody>
 
         </table>
+        <a class="btn btn-primary btn-block"
+           ng-click="model.checkIn()">Sign In</a>
     </form>
 </div>

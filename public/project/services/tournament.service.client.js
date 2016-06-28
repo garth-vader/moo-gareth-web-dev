@@ -10,7 +10,8 @@
             findTournamentByFencer: findTournamentByFencer,
             findTournamentById: findTournamentById,
             updateTournament: updateTournament,
-            deleteTournament: deleteTournament
+            deleteTournament: deleteTournament,
+            checkIn:checkIn
         };
         return api;
 
@@ -44,7 +45,10 @@
             return $http.delete(url);
         }
 
-
+        function checkIn(userId, tournId) {
+            var url = "/api/checkin/"+userId+"/tournament/" + tournId;
+            return $http.post(url);
+        }
 
     }
 })();

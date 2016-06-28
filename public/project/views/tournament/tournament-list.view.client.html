@@ -63,8 +63,6 @@
         <h4>Tournaments you have signed up for</h4>
         <li ng-repeat="tourn in model.regTournaments" class="list-group-item">
             <a href="#/user/{{model.user._id}}/tournament/{{tourn._id}}/view">{{tourn.name}}</a>
-            <a ng-click class="pull-right">
-                <span class="glyphicon glyphicon-ok"></span>
             </a>
         </li>
     </ul>

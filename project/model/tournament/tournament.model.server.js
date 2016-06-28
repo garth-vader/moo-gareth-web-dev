@@ -8,7 +8,7 @@ module.exports = function() {
         createTournament: createTournament,
         findTournamentById: findTournamentById,
         findTournamentByFencer: findTournamentByFencer,
-        checkinFencer: checkinFencer,
+        checkInFencer: checkInFencer,
         findAllTournamentForUser: findAllTournamentForUser,
         updateTournament: updateTournament,
         deleteTournament: deleteTournament
@@ -41,8 +41,35 @@ module.exports = function() {
 
     }
 
-    function checkinFencer(tournamentId, userId) {
-
+    function checkInFencer(userId, tournamentId) {
+        return Tournament
+            .findById(tournamentId)
+            .populate({
+                path: 'fencers',
+                populate: {
+                    path: 'fencer',
+                    model: 'User'
+                }
+            })
+            .then(
+                function(tournament) {
+                    var fencers = tournament.fencers;
+                    for(var i in fencers) {
+                        var fencer = fencers[i];
+                        if(fencer.fencer._id == userId) {
+                            fencer.checkedIn = true;
+                            fencers.set(i, fencer);
+                            // console.log(fencers);
+                            tournament.save();
+                            return;
+                        }
+                    }
+                    return Tournament.findById(tournamentId);
+                },
+                function(error) {
+                    return null;
+                }
+            );
     }
 
     function updateTournament(tournamentId, tournament) {
