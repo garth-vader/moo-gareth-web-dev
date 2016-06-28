@@ -10,8 +10,6 @@
         ];
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
-        vm.logout = logout;
-
         var id = $rootScope.currentUser._id;
 
         function init() {
@@ -23,18 +21,7 @@
         }
 
         init();
-
-        function logout() {
-            UserService
-                .logout(vm.user)
-                .then(
-                    function(response) {
-                        // console.log(response.data);
-                        $rootScope.currentUser = null;
-                        $location.url("/user/");
-                    }
-                );
-        }
+        
 
         function updateUser() {
             if (vm.user.username == null || vm.user.username == "") {

@@ -10,6 +10,12 @@
                 controller: "LoginController",
                 controllerAs: "model"
             })
+            .when( "/logout", {
+                templateUrl: "views/user/login.view.client.html",
+                resolve: {
+                    logout: logout
+                }
+            })
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
                 controller: "LoginController",
@@ -61,6 +67,15 @@
                 controllerAs: "model"
             });
 
+        function logout(UserService, $rootScope) {
+            UserService
+                .logout()
+                .then(function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login")
+                    });
+
+        }
         function checkLoggedIn(UserService, $q, $location, $rootScope) {
             var deferred = $q.defer();
             UserService
