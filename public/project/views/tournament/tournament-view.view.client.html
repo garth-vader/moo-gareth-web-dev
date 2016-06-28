@@ -9,13 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <p class="navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}/tournament/new" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus">
-                    </span>
-                </a>
-            </p>
-            <a class="navbar-brand topnav" href="#/user">
+            <a class="navbar-brand topnav" href="#user/{{model.user._id}}/tournament">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
             </a>
@@ -46,27 +40,52 @@
     <!-- /.container -->
 </nav>
 
+<div class="container">'
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="name">Tournament Name</label>
+            <input ng-model="model.tournament.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Name"
+                   readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input ng-model="model.tournament.location"
+                   type="text"
+                   class="form-control"
+                   id="location"
+                   placeholder="My Club"
+                   readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Tournament Description</label>
+            <textarea ng-model="model.tournament.description"
+                      rows="5"
+                      id="description"
+                      class="form-control"
+                      readonly="readonly">
+            </textarea>
+        </div>
+        <h4>Fencers Signed Up</h4>
 
-<div class="container">
-    <ul class="list-group">
-        <h4>Your Tournaments</h4>
-        <li ng-repeat="tournament in model.myTournaments" class="list-group-item">
-            <a href="#/user/{{model.user._id}}/tournament/{{tournament._id}}/">{{tournament.name}}</a>
-            <a href="#/user/{{model.user._id}}/tournament/{{tournament._id}}" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-    </ul>
+        <table class="table ">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="fencer in model.fencers">
+                <td>{{fencer.fencer.username}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </form>
 </div>
-<div class="container">
-    <ul class="list-group">
-        <h4>Tournaments you have signed up for</h4>
-        <li ng-repeat="tourn in model.regTournaments" class="list-group-item">
-            <a href="#/user/{{model.user._id}}/tournament/{{tourn._id}}/view">{{tourn.name}}</a>
-            <a ng-click class="pull-right">
-                <span class="glyphicon glyphicon-ok"></span>
-            </a>
-        </li>
-    </ul>
-</div>
-<

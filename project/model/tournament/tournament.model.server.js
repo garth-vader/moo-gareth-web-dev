@@ -41,7 +41,7 @@ module.exports = function() {
 
     }
 
-    function checkinFencer(tournamentId) {
+    function checkinFencer(tournamentId, userId) {
 
     }
 
