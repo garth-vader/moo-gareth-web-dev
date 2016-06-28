@@ -47,8 +47,8 @@
     <ul class="list-group">
         <h4>Your Tournaments</h4>
         <li ng-repeat="tournament in model.myTournaments" class="list-group-item">
-            <a href="#/user/{{model.userId}}/tournament/{{tournament._id}}/">{{tournament.name}}</a>
-            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
+            <a href="#/user/{{model.user._id}}/tournament/{{tournament._id}}/">{{tournament.name}}</a>
+            <a href="#/user/{{model.user._id}}/tournament/{{tournament._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
         </li>

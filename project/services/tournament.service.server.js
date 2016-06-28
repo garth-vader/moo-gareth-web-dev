@@ -5,7 +5,7 @@ module.exports = function(app, models) {
 
     app.post("/api/user/:userId/tournament", createTournament);
     app.get("/api/user/:userId/tournament", findAllTournamentForUser);
-    //app.get("/api/website/:websiteId", findWebsiteById);
+    app.get("/api/tournament/:tournamentId", findTournamentById);
     //app.put("/api/website/:websiteId", updateWebsite);
     //app.delete("/api/website/:websiteId", deleteWebsite)
 
@@ -34,6 +34,20 @@ module.exports = function(app, models) {
                 },
                 function(error) {
                     res.status(400).send("Unable to create tournament " + newTournament.name);
+                }
+            );
+    }
+
+    function findTournamentById(req, res) {
+        var tournId = req.params["tournamentId"];
+        tournamentModel
+            .findTournamentById(tournId)
+            .then(
+                function(resp) {
+                    res.json(resp);
+                },
+                function(error) {
+                    res.status(400).send("Unable to find tournament ");
                 }
             );
     }

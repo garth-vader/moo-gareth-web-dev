@@ -2,16 +2,18 @@
 (function(){
     angular
         .module("WebAppMaker")
-        .controller("NewTournamentController", NewTournamentController);
+        .controller("TournamentNewController", TournamentNewController);
 
-    function NewTournamentController($location, $scope, $routeParams, TournamentService) {
+    function TournamentNewController($location, $scope, $rootScope, $routeParams, TournamentService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
+        vm.user = $rootScope.currentUser;
         vm.fencers = [];
         vm.createTournament = createTournament;
         vm.addFencer = addFencer;
         //vm.updateFencer = updateFencer;
         vm.removeFencer = removeFencer;
+
 
         function createTournament(name, description) {
             var newTournament = {};
@@ -21,7 +23,7 @@
             }
             newTournament.name = name;
             newTournament.description = description;
-            newTournament.fencerCheckIn = vm.fencers;
+            newTournament.fencers = vm.fencers;
             TournamentService
                 .createTournament(vm.userId, newTournament)
                 .then(
@@ -36,14 +38,14 @@
 
         function addFencer(fencer) {
             if(fencer == null) return;
-            for(f in vm.fencers) {
-                if(fencer.name == vm.fencers[f].fencerName) {
+            for(var i in vm.fencers) {
+                if(fencer.name == vm.fencers[i].name) {
                     vm.error = "Fencer already added!";
                     return;
                 }
             }
             var newFencer = {
-                fencerName: fencer.name,
+                name: fencer.name,
                 checkedIn: false
             };
             $scope.fencer = null;

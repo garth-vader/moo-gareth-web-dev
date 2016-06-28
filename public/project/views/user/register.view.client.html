@@ -14,25 +14,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                 <span ng-hide="currentUser">
-                    <li>
+                    <li ng-hide="currentUser">
                         <a href="#login">login</a>
                     </li>
-                     <li>
+                     <li ng-hide="currentUser">
                         <a href="#register">register</a>
                     </li>
-                </span>
-                <span ng-show="currentUser">
-                    <li>
+                    <li ng-show="currentUser">
                         <a href="#user/{{model.user._id}}/tournament">tournaments</a>
                     </li>
-                    <li>
+                    <li ng-show="currentUser">
                         <a href="#user">profile</a>
                     </li>
-                    <li>
+                    <li ng-show="currentUser">
                         <a ng-click="model.logout()">logout</a>
                     </li>
-                </span>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

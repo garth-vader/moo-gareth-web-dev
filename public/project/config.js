@@ -41,7 +41,7 @@
             })
             .when("/user/:uid/tournament/new", {
                 templateUrl: "views/tournament/tournament-new.view.client.html",
-                controller: "NewTournamentController",
+                controller: "TournamentNewController",
                 controllerAs: "model",
                 resolve: {
                     loggedin: checkLoggedIn

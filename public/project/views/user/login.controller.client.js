@@ -6,7 +6,7 @@
     function LoginController($location, UserService, $rootScope) {
 
         var vm = this;
-
+        vm.user = $rootScope.currentUser;
         vm.login = login;
         vm.register = register;
         vm.logout = logout;

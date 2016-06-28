@@ -9,6 +9,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.createTournament(name, description)" href="" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus">
+                    </span>
+                </a>
+            </p>
             <a class="navbar-brand topnav" href="#home">F Tourney</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,29 +43,59 @@
 </nav>
 
 <div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <form>
-        <div ng-if="model.error" class="alert alert-danger">
-            {{model.error}}
-        </div>
         <div class="form-group">
-            <label for="name">Website Name</label>
-            <input ng-model="model.tourn.name"
+            <label for="name">Tournament Name</label>
+            <input ng-model="model.tournament.name"
                    type="text"
                    class="form-control"
                    id="name"
-                   placeholder="Blog to End ALL Blogs"/>
+                   placeholder="Name"/>
         </div>
         <div class="form-group">
-            <label for="description">Website Description</label>
-            <textarea ng-model="model.tourn.description"
-                      rows="5"
+            <label for="location">Location</label>
+            <input ng-model="model.tournament.location"
+                   type="text"
+                   class="form-control"
+                   id="location"
+                   placeholder="My Club"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Tournament Description</label>
+            <textarea ng-model="model.tournament.description"
+                      rows="4"
                       id="description"
-                      class="form-control">
-                Cardigan stumptown fixie pork belly est tofu. Kickstarter bicycle rights heirloom, tacos aesthetic letterpress celiac jean shorts elit plaid iPhone. Artisan deep v hella, banh mi direct trade nostrud tofu sapiente lo-fi voluptate exercitation jean shorts kombucha ea. Duis meditation next level pug, sartorial photo booth id fap locavore YOLO minim cillum austin placeat. Tote bag aliquip kickstarter, helvetica master cleanse man bun franzen freegan godard consequat assumenda cardigan poutine. Try-hard est occupy, church-key schlitz nostrud raw denim excepteur culpa typewriter mustache. Mollit tofu fap, nesciunt qui viral do blog bitters.
+                      class="form-control">Enter Your Description Here
             </textarea>
         </div>
+        <h4>Fencers</h4>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            <tr>
+                <th><input ng-model="fencer.name" class="form-control"/></th>
+                <!--<th><input ng-model="course.start" type="date" class="form-control"/></th>-->
+                <th>
+                    <button ng-click="model.addFencer(fencer)" class="btn btn-primary">Add</button>
+                    <!--<button ng-click="updateCourse(course)" class="btn btn-primary btn-success">Update</button>-->
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="fencer in model.tournament.fencers">
+                <td>{{fencer.name}}</td>
+                <td>
+                    <button ng-click="model.removeFencer(fencer)" class="btn btn-danger">Remove</button>
+                    <!--<button ng-click="selectCourse($index)" class="btn btn-info">Select</button>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </form>
-    <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWebsite()"
-       href="">Delete</a>
 </div>
