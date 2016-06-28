@@ -12,6 +12,7 @@
         vm.addFencer = addFencer;
         //vm.updateFencer = updateFencer;
         vm.removeFencer = removeFencer;
+        vm.updateTournament = updateTournament;
 
         function init() {
             vm.tid = $routeParams["tid"];
@@ -50,9 +51,24 @@
         }
 
         function removeFencer(fencer) {
-            console.log(vm.fencers);
             var index = vm.fencers.indexOf(fencer);
             vm.fencers.splice(index,1);
+        }
+
+        function updateTournament() {
+            var tournament = vm.tournament;
+            if(tournament.name == null || tournament === "") vm.error("Tournament Name is Empty");
+            TournamentService
+                .updateTournament(vm.tid, tournament)
+                .then(
+                    function(res) {
+                        init();
+                        vm.success = "Tournament successfully updated";
+                    },
+                    function(error) {
+                        vm.error = error;
+                    }
+                );
         }
     }
 })();

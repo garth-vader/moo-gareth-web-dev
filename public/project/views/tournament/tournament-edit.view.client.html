@@ -10,11 +10,15 @@
                 <span class="icon-bar"></span>
             </button>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createTournament(name, description)" href="" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus">
+                <a ng-click="model.updateTournament(name, description)" href="" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
             </p>
+            <a class="navbar-brand topnav" href="#user/{{model.user._id}}/tournament">
+                        <span class="glyphicon glyphicon-chevron-left">
+                        </span>
+            </a>
             <a class="navbar-brand topnav" href="#home">F Tourney</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -22,8 +26,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="currentUser">
                     <a href="#login">login</a>
-                </li>
-                <li ng-hide="currentUser">
+
                     <a href="#register">register</a>
                 </li>
                 <li ng-show="currentUser">
@@ -43,7 +46,10 @@
 </nav>
 
 <div class="container">
-    <div ng-if="model.error" class="alert alert-danger">
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
     <form>

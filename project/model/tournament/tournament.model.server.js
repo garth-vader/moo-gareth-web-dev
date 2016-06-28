@@ -23,23 +23,18 @@ module.exports = function() {
     function findAllTournamentForUser(userId) {
         return Tournament.find({_creator: userId});
     }
-    function findTournamentById(TournamentId) {
-        return Tournament.findById(TournamentId);
+    function findTournamentById(tournamentId) {
+        return Tournament.findById(tournamentId);
     }
 
-    function updateTournament(TournamentId, Tournament) {
+    function updateTournament(tournamentId, tournament) {
         return Tournament.update(
-            {_id: TournamentId},
-            {$set :
-            {
-
-
-            }
-            }
-        )
+            {_id: tournamentId},
+            {$set : tournament}
+        );
     }
 
-    function deleteTournament(TournamentId) {
-        return Tournament.remove(TournamentId);
+    function deleteTournament(tournamentId) {
+        return Tournament.remove(tournamentId);
     }
 };

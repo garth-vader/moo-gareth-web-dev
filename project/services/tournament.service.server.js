@@ -6,7 +6,7 @@ module.exports = function(app, models) {
     app.post("/api/user/:userId/tournament", createTournament);
     app.get("/api/user/:userId/tournament", findAllTournamentForUser);
     app.get("/api/tournament/:tournamentId", findTournamentById);
-    //app.put("/api/website/:websiteId", updateWebsite);
+    app.put("/api/tournament/:tournamentId", updateTournament);
     //app.delete("/api/website/:websiteId", deleteWebsite)
 
     function findAllTournamentForUser(req, res) {
@@ -48,6 +48,21 @@ module.exports = function(app, models) {
                 },
                 function(error) {
                     res.status(400).send("Unable to find tournament ");
+                }
+            );
+    }
+
+    function updateTournament(req, res) {
+        var id = req.params["tournamentId"];
+        var newTournament = req.body;
+        tournamentModel
+            .updateTournament(id, newTournament)
+            .then(
+                function(resp) {
+                    res.sendStatus(200);
+                },
+                function(error) {
+                    res.status(400).send("Tournament with ID: "+ id +" not found");
                 }
             );
     }

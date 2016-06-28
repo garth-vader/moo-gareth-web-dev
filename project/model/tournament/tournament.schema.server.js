@@ -6,8 +6,12 @@ module.exports = function() {
         name: String,
         description: String,
         location: String,
+        password: String,
         fencers: [{
-            checkedIn: Boolean,
+            checkedIn: {
+                type: Boolean,
+                default: false
+            },
             name: String
         }],
         dateCreate: {type: Date, default: Date.now()},

@@ -8,7 +8,7 @@
             createTournament: createTournament,
             findTournamentByUser: findTournamentByUser,
             findTournamentById: findTournamentById,
-            //updateTournament: updateTournament,
+            updateTournament: updateTournament,
             //deleteTournament: deleteTournament
         };
         return api;
@@ -28,6 +28,10 @@
             return $http.get(url);
         }
 
+        function updateTournament(tournId, tournament) {
+            var url = "/api/tournament/"+tournId;
+            return $http.put(url, tournament);
+        }
 
 
 
