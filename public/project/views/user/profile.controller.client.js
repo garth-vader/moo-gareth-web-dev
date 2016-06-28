@@ -29,9 +29,9 @@
                 .logout(vm.user)
                 .then(
                     function(response) {
-                        console.log(response.data);
+                        // console.log(response.data);
                         $rootScope.currentUser = null;
-                        $location.url("/");
+                        $location.url("/user/");
                     }
                 );
         }

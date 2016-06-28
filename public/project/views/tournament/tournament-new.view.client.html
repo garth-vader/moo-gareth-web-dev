@@ -75,7 +75,7 @@
                       class="form-control">Enter Your Description Here
             </textarea>
         </div>
-        <h4>Fencers</h4>
+        <h4>Search For Fencers</h4>
 
         <table class="table">
             <thead>
@@ -83,23 +83,38 @@
                 <th>Name</th>
             </tr>
             <tr>
-                <th><input ng-model="fencer.name" class="form-control"/></th>
-                <!--<th><input ng-model="course.start" type="date" class="form-control"/></th>-->
+                <th><input ng-model="text" class="form-control"/></th>
                 <th>
-                    <button ng-click="model.addFencer(fencer)" class="btn btn-primary">Add</button>
-                    <!--<button ng-click="updateCourse(course)" class="btn btn-primary btn-success">Update</button>-->
+                    <button ng-click="model.search(text)" class="btn btn-primary">Search</button>
                 </th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="fencer in model.fencers">
-                <td>{{fencer.name}}</td>
+            <tr ng-repeat="user in model.users">
+                <td>{{user.username}}</td>
+
                 <td>
-                    <button ng-click="model.removeFencer(fencer)" class="btn btn-danger">Remove</button>
-                    <!--<button ng-click="selectCourse($index)" class="btn btn-info">Select</button>-->
+                    <button ng-click="model.addFencer(user)" class="btn btn-success">add</button>
                 </td>
             </tr>
             </tbody>
+
+        </table>
+        <h4>Fencers Signed Up</h4>
+
+        <table class="table">
+            <tr>
+                <th>Name</th>
+            </tr>
+            <tbody>
+            <tr ng-repeat="fencer in model.fencers">
+                <td>{{fencer.fencer.username}}</td>
+                <td>
+                    <button ng-click="model.removeFencer(fencer)" class="btn btn-danger">Remove</button>
+                </td>
+            </tr>
+            </tbody>
+
         </table>
     </form>
 </div>

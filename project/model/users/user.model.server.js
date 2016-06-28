@@ -10,6 +10,7 @@ module.exports = function() {
         findUserByFacebookId: findUserByFacebookId,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        search:search,
         updateUser: updateUser,
         deleteUser: deleteUser
     };
@@ -33,6 +34,15 @@ module.exports = function() {
 
     function findUserByCredentials(username, password) {
         return User.findOne({username: username, password: password});
+    }
+
+    function search(searchText) {
+        return User.find({$or: [
+            {'email': {$regex:searchText, $options:'i'}},
+            {'username': {$regex:searchText, $options:'i'}},
+            {'firstName': {$regex:searchText, $options:'i'}},
+            {'lastName': {$regex:searchText, $options:'i'}}]
+        }, {password: 0, dateCreated: 0});
     }
 
     function updateUser(userId, user) {

@@ -13,10 +13,10 @@ module.exports = function(app, models) {
     };
 
 
-    app.post("/api/user", createUser);
+    // app.post("/api/user", createUser);
     app.post("/api/login", passport.authenticate('wam'), login);
     app.post('/api/logout', logout);
-    app.post ('/api/register', register);
+    app.post('/api/register', register);
     app.get("/api/user/search/:text", search);
     app.get("/api/loggedin", loggedin);
     app.get("/api/user", getUsers);
@@ -56,29 +56,28 @@ module.exports = function(app, models) {
             .then(
                 function(resp) {
                     if (resp == null) {
-                        createUser(user);
+                        userModel
+                            .createUser(user)
+                            .then(
+                                function(user){
+                                    if(user){
+                                        req.login(user, function(err) {
+                                            if(err) {
+                                                res.status(400).send(err);
+                                            } else {
+                                                res.json(user);
+                                            }
+                                        });
+                                    }
+                                }
+                            );
+                        return;
                     } else {
                         res.status(400).send("user already exists");
+                        return;
                     }
                 });
 
-    }
-
-    function createUser(user) {
-        userModel.createUser(user)
-            .then(
-                function(user){
-                    if(user){
-                        req.login(user, function(err) {
-                            if(err) {
-                                res.status(400).send(err);
-                            } else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                }
-            );
     }
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
@@ -185,7 +184,6 @@ module.exports = function(app, models) {
 
     function search(req, resp) {
         var searchText = req.params["text"];
-
         userModel
             .search(searchText)
             .then(

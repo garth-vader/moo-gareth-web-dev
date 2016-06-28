@@ -11,7 +11,7 @@ module.exports = function() {
                 type: Boolean,
                 default: false
             },
-            name:String
+            fencer: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
         }],
         dateCreate: {type: Date, default: Date.now()},
     }, {collection: "project.tournament"});

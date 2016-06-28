@@ -4,16 +4,19 @@
         .module("WebAppMaker")
         .controller("TournamentNewController", TournamentNewController);
 
-    function TournamentNewController($location, $scope, $rootScope, $routeParams, TournamentService) {
+    function TournamentNewController($location, $scope, $rootScope, $routeParams, TournamentService, UserService) {
         var vm = this;
-        vm.userId = $routeParams["uid"];
-        vm.user = $rootScope.currentUser;
-        vm.fencers = [];
+        vm.search = search;
         vm.createTournament = createTournament;
         vm.addFencer = addFencer;
         vm.removeFencer = removeFencer;
 
-
+        function init() {
+            vm.userId = $routeParams["uid"];
+            vm.user = $rootScope.currentUser;
+            vm.fencers = [];
+        }
+        init();
         function createTournament(name, description) {
             var newTournament = {};
             if(name == "" || name == null) {
@@ -34,26 +37,42 @@
                     }
                 );
         }
-        
+
+        function search(name) {
+            if (name === null) return;
+            UserService.search(name)
+                .then(
+                    function(resp) {
+                        vm.users = resp.data;
+                        $scope.text =null;
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
+        }
+
 
         function addFencer(fencer) {
             if(fencer == null) return;
             for(var i in vm.fencers) {
-                if(fencer.name == vm.fencers[i].name) {
+                if(fencer.username == vm.fencers[i].fencer.username) {
                     vm.error = "Fencer already added!";
                     return;
                 }
             }
             var newFencer = {
-                name: fencer.name,
+                fencer: fencer,
                 checkedIn: false
             };
-            $scope.fencer = null;
+            // console.log(newFencer);
             vm.fencers.push(newFencer);
+            console.log(vm.fencers);
+            return;
         }
 
         function removeFencer(fencer) {
-            console.log(vm.fencers);
+            // console.log(vm.fencers);
             var index = vm.fencers.indexOf(fencer);
             vm.fencers.splice(index,1);
         }

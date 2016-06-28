@@ -8,6 +8,7 @@
         var api = {
             login:login,
             logout: logout,
+            search: search,
             register: register,
             checkLoggedIn: checkLoggedIn,
             createUser: createUser,
@@ -30,6 +31,9 @@
 
         function register(user) {
             return $http.post("/api/register", user);
+        }
+        function search(text) {
+            return $http.get("/api/user/search/"+text);
         }
 
         function checkLoggedIn() {
