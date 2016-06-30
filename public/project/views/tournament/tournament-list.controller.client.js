@@ -25,7 +25,7 @@
                 .then(
                     function(resp) {
                         vm.regTournaments = resp.data;
-                        console.log(vm.regTournaments);
+                        // console.log(vm.regTournaments);
                     });
         }
 
