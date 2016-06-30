@@ -85,7 +85,7 @@
                         vm.success = "Tournament successfully updated";
                     },
                     function(error) {
-                        vm.error = error;
+                        vm.error = error.data;
                     }
                 );
         }
