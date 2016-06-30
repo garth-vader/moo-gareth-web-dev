@@ -24,6 +24,7 @@ module.exports = function() {
     function findAllTournamentForUser(userId) {
         return Tournament.find({_creator: userId});
     }
+
     function findTournamentById(tournamentId) {
         return Tournament
             .findById(tournamentId)
@@ -75,7 +76,14 @@ module.exports = function() {
     function updateTournament(tournamentId, tournament) {
         return Tournament.update(
             {_id: tournamentId},
-            {$set : tournament}
+            {$set :
+            {
+                name: tournament.name,
+                description: tournament.description,
+                location: tournament.location,
+                fencers: tournament.fencers
+            }
+            }
         );
     }
 
